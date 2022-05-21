@@ -30,14 +30,14 @@ const Header = () => {
         </Link>
         <div className="flex items-center">
           <li className="list-none mr-8">
-            <NavLink to="/login">
+            <Link to="/login">
               <i class="fa-solid fa-user pr-1"></i> Login
-            </NavLink>
+            </Link>
           </li>
           <li className="list-none">
-            <NavLink to="/signUp">
+            <Link to="/signUp">
               <i class="fa-solid fa-user-plus pr-1"></i> Sign Up
-            </NavLink>
+            </Link>
           </li>
         </div>
       </div>
