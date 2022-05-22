@@ -6,10 +6,9 @@ import {
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
-
-import Spinner from "../../Home/Shared/Spinner/Spinner";
 import auth from "../../../firebase.init";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import Spinner from "../../Shared/Spinner/Spinner";
 
 const SignUp = () => {
   const [

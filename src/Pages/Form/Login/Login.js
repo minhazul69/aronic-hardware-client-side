@@ -4,8 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast from "react-hot-toast";
-import Spinner from "../../Home/Shared/Spinner/Spinner";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import Spinner from "../../Shared/Spinner/Spinner";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, signinLoading, signInError] =

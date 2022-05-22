@@ -3,8 +3,8 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
-import Spinner from "../../Home/Shared/Spinner/Spinner";
 import google from "../../../img/google.svg";
+import Spinner from "../../Shared/Spinner/Spinner";
 const GoogleLogin = () => {
   const [signInWithGoogle, user, googleLoading, googleError] =
     useSignInWithGoogle(auth);

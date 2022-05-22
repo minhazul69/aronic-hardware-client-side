@@ -1,9 +1,9 @@
 import React from "react";
-import logo from "../../../../img/footer-logo_300x300.webp";
+import logo from "../../../img/footer-logo_300x300.webp";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 const Header = () => {
-  const navitem = (
+  const navItem = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
@@ -31,23 +31,23 @@ const Header = () => {
         <div className="flex items-center">
           <li className="list-none mr-8">
             <Link to="/login">
-              <i class="fa-solid fa-user pr-1"></i> Login
+              <i className="fa-solid fa-user pr-1"></i> Login
             </Link>
           </li>
           <li className="list-none">
             <Link to="/signUp">
-              <i class="fa-solid fa-user-plus pr-1"></i> Sign Up
+              <i className="fa-solid fa-user-plus pr-1"></i> Sign Up
             </Link>
           </li>
         </div>
       </div>
-      <div class="navbar bg-black">
-        <div class="navbar-start">
-          <div class="dropdown">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
+      <div className="navbar bg-black">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex="0" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -63,14 +63,14 @@ const Header = () => {
             </label>
             <ul
               tabIndex="0"
-              class=" menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className=" menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {navitem}
+              {navItem}
             </ul>
           </div>
         </div>
-        <div class="navbar-center hidden lg:flex lg:flex-col">
-          <ul class=" menu menu-horizontal p-0 text-white">{navitem}</ul>
+        <div className="navbar-center hidden lg:flex lg:flex-col">
+          <ul className=" menu menu-horizontal p-0 text-white">{navItem}</ul>
         </div>
       </div>
     </div>
