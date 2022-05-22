@@ -44,7 +44,7 @@ const HomeBanner = () => {
                 Cras dapi bus. Vivamus elementum semper nisi.
               </p>
               <button class="btn btn-active btn-warning px-5 mt-3">
-                Button
+                Shop Now
               </button>
             </div>
           </div>
@@ -58,8 +58,8 @@ const HomeBanner = () => {
                 Consequat semper viverra nam libero. Neque convallis a cras
                 semper proin libero nunc sed rit acreco sit amet auctor.
               </p>
-              <button class="btn btn-active btn-warning px-5 mt-3">
-                Button
+              <button class="btn btn-active btn-success px-5 mt-3">
+                Shop Now
               </button>
             </div>
           </div>
@@ -78,8 +78,8 @@ const HomeBanner = () => {
                 Laoreet non curabitur gravida arcu ac tortor dignissim
                 convallis.
               </p>
-              <button class="btn btn-active btn-warning px-5 mt-3">
-                Button
+              <button class="btn btn-active btn-primary px-5 mt-3">
+                Shop Now
               </button>
             </div>
           </div>
