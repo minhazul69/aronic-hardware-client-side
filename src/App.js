@@ -6,6 +6,7 @@ import ResetPassword from "./Pages/Form/ResetPassword/ResetPassword";
 import { Toaster } from "react-hot-toast";
 import Header from "./Pages/Shared/Header/Header";
 import Home from "./Pages/Home/Home";
+import Footer from "./Pages/Shared/Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
       </Routes>
+      <Footer />
       <Toaster />
     </div>
   );

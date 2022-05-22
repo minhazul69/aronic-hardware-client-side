@@ -11,33 +11,33 @@ const Offer = () => {
         </figure>
         <div class="card-body mt-5">
           <h2 className="font-bold text-2xl text-right">Best Offer Today !!</h2>
-          <span className="font-bold text-2xl text-right bg-warning w-60 ml-auto p-2 text-black">
+          <span className="text-xl text-right bg-warning w-50 ml-auto p-2 text-black">
             Best Offer Today !
           </span>
           <h2 className=" text-2xl text-right">
             <span className="text-red-500"> 30%</span> off New Trending
           </h2>
           <div className="text-right">
-            <button class="btn btn-warning hover:bg-black hover:text-white btn-wide">
+            <button class="btn btn-warning hover:bg-black hover:text-white">
               Shop Now
             </button>
           </div>
         </div>
       </div>
-      <div class="card  bg-base-100 shadow-xl image-full">
+      <div class="card bg-base-100 shadow-xl image-full">
         <figure>
           <img src={offerImg2} alt="Shoes" />
         </figure>
         <div class="card-body mt-5">
-          <h2 className="font-bold text-2xl text-right">Best Offer Today !!</h2>
-          <span className="font-bold text-2xl text-right bg-warning w-60 ml-auto p-2 text-black">
-            Best Offer Today !
+          <h2 className="font-bold text-2xl text-right">Plumber’s Picks!</h2>
+          <span className="text-xl text-right bg-warning w-70 ml-auto p-2 text-black">
+            LIMITED STOCK OFFERS
           </span>
           <h2 className=" text-2xl text-right">
-            <span className="text-red-500"> 30%</span> off New Trending
+            <span className="text-red-500"> 42%</span> off Best Deals
           </h2>
           <div className="text-right">
-            <button class="btn btn-warning hover:bg-black hover:text-white btn-wide">
+            <button class="btn btn-warning hover:bg-black hover:text-white">
               Shop Now
             </button>
           </div>
