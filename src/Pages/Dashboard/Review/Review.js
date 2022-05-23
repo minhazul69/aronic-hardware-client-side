@@ -1,17 +1,85 @@
-import React from "react";
+import { useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import toast from "react-hot-toast";
 
 const Review = () => {
+  const [isRadio, setIsRadio] = useState(5);
+  const [selectStar, setSelectStar] = useState(0);
   const [user] = useAuthState(auth);
-  const handleReviewSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [file, setFile] = useState();
+  const countryRef = useRef("");
+  const descriptionRef = useRef("");
   let dateObj = new Date();
   let shortMonth = dateObj.toLocaleString("en-us", { month: "short" });
   let myDate =
     shortMonth + " " + dateObj.getUTCDate() + "," + dateObj.getUTCFullYear();
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    const countryName = countryRef.current.value;
+    const description = descriptionRef.current.value;
+    // if (!file || file === undefined) {
+    //   return toast.error("Please Select Image And Try Again");
+    // }
+    const image = file;
+    console.log("image", image);
+    const name = user?.displayName;
+    const formData = new FormData();
+    formData.append("image", image);
+    const imageStorageKey = "fda6ab6214274b735172bdbc386ccc58";
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          console.log(result.success);
+          const image = result.data.url;
+          console.log(image);
+          const review = {
+            image,
+            name,
+            myDate,
+            countryName,
+            selectStar,
+            description,
+          };
+          fetch("http://localhost:5000/review", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(review),
+          })
+            .then((res) => res.json())
+            .then((inserted) => {
+              console.log(inserted);
+              if (inserted.insertedId) {
+                toast.success("Add Review SuccessFull");
+                e.target.reset();
+              } else {
+                toast.error("Review Add Fail Please Try Again");
+              }
+              console.log(inserted);
+            });
+        }
+        console.log("Success:", result);
+      });
 
+    // console.log(review);
+  };
+  const handleChange = (e) => {
+    const star = e.currentTarget.value;
+    setIsRadio(+star);
+    setSelectStar(star);
+  };
+  const handleUrlChange = (e) => {
+    const [f] = e.target.files;
+    setFile(f);
+  };
   return (
     <div>
       <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">
@@ -45,28 +113,63 @@ const Review = () => {
                 <span class="label-text">Country Name</span>
               </label>
               <input
+                ref={countryRef}
                 id="country"
                 type="text"
                 placeholder="Enter Your Country"
                 class="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
+            <div class="form-control w-full max-w-xs mx-auto my-5">
               <label htmlFor="country" class="label">
                 <span class="label-text">Rating</span>
               </label>
-              <div class="rating rating-lg">
-                <input type="radio" name="rating-9" class="rating-hidden" />
-                <input type="radio" name="rating-9" class="mask mask-star-2" />
+              <div class="rating rating-lg mx-auto">
                 <input
                   type="radio"
-                  name="rating-9"
-                  class="mask mask-star-2"
-                  checked
+                  name="rating-8"
+                  id="radio1"
+                  value="1"
+                  onChange={handleChange}
+                  checked={isRadio === 1}
+                  class="mask mask-star-2 bg-orange-400"
                 />
-                <input type="radio" name="rating-9" class="mask mask-star-2" />
-                <input type="radio" name="rating-9" class="mask mask-star-2" />
-                <input type="radio" name="rating-9" class="mask mask-star-2" />
+                <input
+                  type="radio"
+                  name="rating-8"
+                  id="radio2"
+                  value="2"
+                  onChange={handleChange}
+                  checked={isRadio === 2}
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-8"
+                  id="radio3"
+                  value="3"
+                  onChange={handleChange}
+                  checked={isRadio === 3}
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-8"
+                  id="radio4"
+                  value="4"
+                  onChange={handleChange}
+                  checked={isRadio === 4}
+                  class="mask mask-star-2 bg-orange-400"
+                />
+                <input
+                  type="radio"
+                  name="rating-8"
+                  id="radio5"
+                  value="5"
+                  onChange={handleChange}
+                  checked={isRadio === 5}
+                  class="mask mask-star-2 bg-orange-400"
+                />
               </div>
             </div>
             <div class="form-control w-full max-w-xs">
@@ -74,6 +177,7 @@ const Review = () => {
                 <span class="label-text">Your Comment</span>
               </label>
               <textarea
+                ref={descriptionRef}
                 id="description"
                 class="textarea textarea-primary h-40"
                 placeholder="Enter Comment"
@@ -107,9 +211,19 @@ const Review = () => {
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input
+                  onChange={handleUrlChange}
+                  multiple={false}
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                />
               </label>
             </div>
+            <div class="divider">OR</div>
+            <button type="submit" class="btn btn-warning ">
+              Add Review
+            </button>
           </form>
         </div>
       </div>
