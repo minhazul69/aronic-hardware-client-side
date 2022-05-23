@@ -6,6 +6,8 @@ import Spinner from "../Shared/Spinner/Spinner";
 
 const Purchase = () => {
   const quantityRef = useRef("");
+  const phoneRef = useRef("");
+  const addressRef = useRef("");
   const { productId } = useParams();
   const { data: productDetails, isLoading } = useQuery("productId", () =>
     fetch(`http://localhost:5000/product/${productId}`).then((res) =>
@@ -19,12 +21,14 @@ const Purchase = () => {
   const handleOrderQuantity = (e) => {
     e.preventDefault();
     const inputQuantity = quantityRef.current.value;
+    const phone = quantityRef.current.value;
+    const address = quantityRef.current.value;
     console.log(quantity);
-    if (!inputQuantity) {
+    if (!phone || !address || !inputQuantity) {
       return toast.error("Please Type A Quantity");
     }
-    if (isNaN(inputQuantity)) {
-      return toast.error("Is Not A Number Please Type A Quantity");
+    if (isNaN(phone) || isNaN(inputQuantity)) {
+      return toast.error("Is Not A Number Please Type A Number");
     }
     if (inputQuantity < 100) {
       return toast.error("Please Order Over 100");
@@ -56,12 +60,42 @@ const Purchase = () => {
             Minimum Order Quantity: 100
           </h3>
           <form onSubmit={handleOrderQuantity}>
-            <input
-              ref={quantityRef}
-              type="text"
-              placeholder="Type Quantity"
-              className="input input-bordered w-full max-w-xs border-0"
-            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-5">
+              <div class="form-control w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Phone Number</span>
+                </label>
+                <input
+                  ref={phoneRef}
+                  type="tel"
+                  placeholder="Enter Your Phone Number"
+                  class="input input-bordered w-full max-w-xs border-0"
+                />
+              </div>
+              <div class="form-control w-full max-w-xs">
+                <label class="label">
+                  <span class="label-text">Address</span>
+                </label>
+                <input
+                  ref={addressRef}
+                  type="text"
+                  placeholder="Enter Your Address"
+                  class="input input-bordered w-full max-w-xs border-0"
+                />
+              </div>
+            </div>
+            <div class="form-control w-full max-w-xs mx-auto">
+              <label htmlFor="quantity" class="label">
+                <span class="label-text">Quantity</span>
+              </label>
+              <input
+                id="quantity"
+                ref={quantityRef}
+                type="text"
+                placeholder="Type Quantity"
+                className="input input-bordered w-full max-w-xs border-0"
+              />
+            </div>
             <div className="card-actions justify-center mt-10">
               <button type="submit" className="btn btn-primary">
                 Purchase Now
