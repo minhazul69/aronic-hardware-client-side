@@ -9,6 +9,7 @@ import {
 import auth from "../../../firebase.init";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import Spinner from "../../Shared/Spinner/Spinner";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
   const [
@@ -26,23 +27,21 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  if (user) {
-    navigate("/");
-  }
-
   useEffect(() => {
     if (userCreateError) {
       const error = userCreateError?.message.split(":")[1];
       toast.error(error);
     }
   }, [userCreateError]);
+  const [token] = useToken(user);
   useEffect(() => {
-    if (user) {
+    if (token) {
       setTimeout(() => {
         toast.success("Create Account SuccessFully");
       }, 1000);
+      navigate("/");
     }
-  }, [user, navigate]);
+  }, [token, navigate]);
   if (userCreatLoading) {
     return <Spinner />;
   }

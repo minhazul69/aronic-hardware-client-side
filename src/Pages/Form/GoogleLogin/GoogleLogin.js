@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import google from "../../../img/google.svg";
 import Spinner from "../../Shared/Spinner/Spinner";
+import useToken from "../../Hooks/useToken";
 const GoogleLogin = () => {
   const [signInWithGoogle, user, googleLoading, googleError] =
     useSignInWithGoogle(auth);
@@ -17,16 +18,17 @@ const GoogleLogin = () => {
       toast.error(errorMessage);
     }
   }, [googleError]);
+  const [token] = useToken(user);
   if (user) {
     navigate(from, { replace: true });
   }
   useEffect(() => {
-    if (user) {
+    if (token) {
       setTimeout(() => {
         toast.success("User Login SuccessFull");
       }, 1000);
     }
-  }, [user, from, navigate]);
+  }, [token, from, navigate]);
   if (googleLoading) {
     return <Spinner />;
   }

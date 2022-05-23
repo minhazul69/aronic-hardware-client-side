@@ -6,6 +6,7 @@ import auth from "../../../firebase.init";
 import toast from "react-hot-toast";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import Spinner from "../../Shared/Spinner/Spinner";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, signinLoading, signInError] =
@@ -19,12 +20,13 @@ const Login = () => {
     resetField,
     formState: { errors },
   } = useForm();
+  const [token] = useToken(user);
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true });
       toast.success("User Login SuccessFull");
     }
-  }, [from, navigate, user]);
+  }, [from, navigate, token]);
 
   useEffect(() => {
     if (signInError) {

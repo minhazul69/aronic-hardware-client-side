@@ -1,18 +1,29 @@
 import React, { useRef } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import auth from "../../firebase.init";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const Purchase = () => {
   const quantityRef = useRef("");
   const phoneRef = useRef("");
   const addressRef = useRef("");
+  const addQuantityRef = useRef("");
   const { productId } = useParams();
-  const { data: productDetails, isLoading } = useQuery("productId", () =>
-    fetch(`http://localhost:5000/product/${productId}`).then((res) =>
-      res.json()
-    )
+  const [user] = useAuthState(auth);
+  const {
+    data: productDetails,
+    isLoading,
+    refetch,
+  } = useQuery("productId", () =>
+    fetch(`http://localhost:5000/product/${productId}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;
@@ -20,25 +31,97 @@ const Purchase = () => {
   const { name, image, description, price, quantity } = productDetails;
   const handleOrderQuantity = (e) => {
     e.preventDefault();
-    const inputQuantity = quantityRef.current.value;
+    const orderProduct = quantityRef.current.value;
     const phone = quantityRef.current.value;
     const address = quantityRef.current.value;
-    console.log(quantity);
-    if (!phone || !address || !inputQuantity) {
+    if (!phone || !address || !orderProduct) {
       return toast.error("Please Type A Quantity");
     }
-    if (isNaN(phone) || isNaN(inputQuantity)) {
+    if (isNaN(phone) || isNaN(orderProduct)) {
       return toast.error("Is Not A Number Please Type A Number");
     }
-    if (inputQuantity < 100) {
+    if (orderProduct < 100) {
       return toast.error("Please Order Over 100");
     }
-    if (inputQuantity > quantity) {
+    if (orderProduct > quantity) {
       return toast.error(
         "Your Order Quantity Must Be Less Then Available Quantity"
       );
     }
-    console.log(inputQuantity);
+    const newQuantity = quantity - orderProduct;
+    const email = user?.email;
+    const order = {
+      email,
+      name,
+      image,
+      description,
+      price,
+      orderProduct,
+      phone,
+      address,
+    };
+    fetch("http://localhost:5000/order", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          const updateUser = { quantity: newQuantity };
+          const url = `http://localhost:5000/product/${productId}`;
+          fetch(url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data) {
+                refetch();
+                toast.success("Your Order Added SuccessFull");
+                e.target.reset();
+                console.log(data);
+              }
+            });
+        }
+      });
+  };
+  const handleQuantityAdd = (e) => {
+    e.preventDefault();
+    const updateQuantity = addQuantityRef.current.value;
+    if (!updateQuantity) {
+      return toast.error("Please Type A Quantity");
+    }
+    if (isNaN(updateQuantity)) {
+      return toast.error("Quantity Is Not A Number Please Type Number");
+    }
+    const newQuantity = parseInt(quantity) + parseInt(updateQuantity);
+    const updateUser = { quantity: newQuantity };
+    const url = `http://localhost:5000/product/${productId}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          refetch();
+          toast.success("Your Order Added SuccessFull");
+          e.target.reset();
+          console.log(data);
+        }
+      });
+    console.log(newQuantity);
   };
   return (
     <div className="lg:px-12">
@@ -99,6 +182,27 @@ const Purchase = () => {
             <div className="card-actions justify-center mt-10">
               <button type="submit" className="btn btn-primary">
                 Purchase Now
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card w-96 bg-base-100 shadow-2xl mx-auto">
+        <div class="card-body">
+          <h2 class="text-center text-yellow-400 text-3xl font-bold">
+            Add Product Quantity
+          </h2>
+          <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
+          <form onSubmit={handleQuantityAdd}>
+            <input
+              ref={addQuantityRef}
+              type="text"
+              placeholder="Add Product Quantity"
+              class="input input-bordered w-full max-w-xs"
+            />
+            <div class="card-actions justify-center">
+              <button class="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
+                Add Quantity
               </button>
             </div>
           </form>
