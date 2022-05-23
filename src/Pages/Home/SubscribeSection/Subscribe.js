@@ -11,10 +11,10 @@ const Subscribe = () => {
           <input
             type="text"
             placeholder="Type here"
-            class="input input-bordered input-secondary w-full max-w-xs border-0"
+            className="input input-bordered input-secondary w-full max-w-xs border-0"
           />
-          <button class="bg-yellow-400 btn border-0 btn-accent rounded-none ml-3 hover:bg-white">
-            Submit <i class="fa-solid fa-paper-plane ml-2"></i>
+          <button className="bg-yellow-400 btn border-0 btn-accent rounded-none ml-3 hover:bg-white">
+            Submit <i className="fa-solid fa-paper-plane ml-2"></i>
           </button>
         </div>
       </div>

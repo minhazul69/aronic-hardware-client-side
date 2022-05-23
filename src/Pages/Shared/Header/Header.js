@@ -1,8 +1,12 @@
 import React from "react";
 import logo from "../../../img/footer-logo_300x300.webp";
 import { Link, NavLink } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import auth from "../../../firebase.init";
 import "./Header.css";
 const Header = () => {
+  const [user] = useAuthState(auth);
   const navItem = (
     <>
       <li>
@@ -22,18 +26,28 @@ const Header = () => {
     </>
   );
   return (
-    <div className="lg:px-40 mt-5">
+    <div className="lg:px-36 mt-5">
       <div className="flex items-center justify-between">
         <Link to="/">
           {" "}
           <img className="w-40 lg:w-48" src={logo} alt="" />
         </Link>
         <div className="flex items-center">
-          <li className="list-none mr-8">
-            <Link to="/login">
-              <i className="fa-solid fa-user pr-1"></i> Login
-            </Link>
-          </li>
+          {user ? (
+            <button
+              onClick={() => signOut(auth)}
+              className="btn btn-active btn-ghost mr-5"
+            >
+              <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i> Sign
+              Out
+            </button>
+          ) : (
+            <li className="list-none mr-8">
+              <Link to="/login">
+                <i className="fa-solid fa-user pr-1"></i> Login
+              </Link>
+            </li>
+          )}
           <li className="list-none">
             <Link to="/signUp">
               <i className="fa-solid fa-user-plus pr-1"></i> Sign Up

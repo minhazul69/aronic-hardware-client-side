@@ -3,11 +3,11 @@ import React from "react";
 const Review = ({ review }) => {
   const { name, img, country, description, date, rating } = review;
   return (
-    <div class="card w-96 bg-base-100 shadow-xl px-6">
-      <div class="card-body">
+    <div className="card w-96 bg-base-100 shadow-xl px-6">
+      <div className="card-body">
         <div className="flex items-center">
-          <div class="avatar mr-3">
-            <div class="w-16 rounded-full">
+          <div className="avatar mr-3">
+            <div className="w-16 rounded-full">
               <img src={img} alt={name} />
             </div>
           </div>

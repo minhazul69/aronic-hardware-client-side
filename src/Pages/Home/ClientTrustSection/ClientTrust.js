@@ -26,10 +26,10 @@ const ClientTrust = () => {
             <h2 className="text-2xl mt-2">Don't hesitate to contact us</h2>
           </div>
           <div>
-            <button class="btn bg-yellow-400 border-0 hover:bg-yellow-600 mr-6 px-10">
+            <button className="btn bg-yellow-400 border-0 hover:bg-yellow-600 mr-6 px-10">
               Request For Quote
             </button>
-            <button class="btn bg-sky-800 hover:bg-sky-900 border-0 px-10">
+            <button className="btn bg-sky-800 hover:bg-sky-900 border-0 px-10">
               Contact Us
             </button>
           </div>
