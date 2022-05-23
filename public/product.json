@@ -1,0 +1,50 @@
+[
+  {
+    "_id": 1,
+    "name": "REDUCERS & ADAPTERS",
+    "image": "https://i.ibb.co/CtNHrYs/product1-600x.webp",
+    "description": "The Neiko 30201A Adapter and Reducer Set comes in a set of 5 pieces of high quality chrome vanadium steel construction for superior power. It features a beautiful mirror finish to prevent rusting and corrosion upholding a long service life. Each item has a spring",
+    "price": 54,
+    "quantity": 400
+  },
+  {
+    "_id": 2,
+    "name": "THE VISE",
+    "image": "https://i.ibb.co/v3h23N8/product19-600x.webp",
+    "description": "Olympia Tools is a widely recognized brand of hardware products designed for true professionals who takes their tools seriously. Each piece is made to exacting tolerances and tested to ensure that it meets and exceeds",
+    "price": 74,
+    "quantity": 700
+  },
+  {
+    "_id": 3,
+    "name": "HACKSAW BLADES KIT",
+    "image": "https://i.ibb.co/8KxZzcX/product22-600x.webp",
+    "description": "The TEKTON 6825 Hacksaw Blade Set is constructed of hardened and tempered high-carbon steel. There are two blades each of 18, 24 and 32 teeth per inch. This is a universal replacement blade for 12 in. hacksaw frames.",
+    "price": 84,
+    "quantity": 600
+  },
+  {
+    "_id": 4,
+    "name": "MONKEY SPANNERS",
+    "image": "https://i.ibb.co/GJR3c58/product23-600x.webp",
+    "description": "Made of hardened and forged steel, strong, high quality, durable Adjustable jaw, flexible, easy to use The handle is comfortable to grip, with a hanging hole, save place Used for automotive maintenance and repair, plumbing, general assembly tasks and more",
+    "price": 54,
+    "quantity": 700
+  },
+  {
+    "_id": 5,
+    "name": "CARPENTRY TOOLS SET",
+    "image": "https://i.ibb.co/W5ZgGqr/product30-600x.webp",
+    "description": "This 20V MAX Lithium Ion 8-Tool Combo Kit features a PORTER-CABLE 20V Drill/Driver, Circular Saw, Recip Saw, Impact Driver, Jigsaw, Sander, Oscillating Tool and Flashlight. For professional contractors, carpenters, and those in the trades, this combo kit provides the tools to deliver top-quality work without the ",
+    "price": 34,
+    "quantity": 900
+  },
+  {
+    "_id": 6,
+    "name": "CLAMPS & REDUCERS",
+    "image": "https://i.ibb.co/LN9G4wy/product32-600x.webp",
+    "description": "Supply Giant Flexible Couplings have found wide acceptance among sewer and plumbing contractors and municipalities because of their quality and ease of installation. Supply Giant pipe couplings and adapters are used for all types of in-house and sewer connections: drain, waste, vent",
+    "price": 64,
+    "quantity": 700
+  }
+]
