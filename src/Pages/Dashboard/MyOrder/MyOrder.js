@@ -29,33 +29,38 @@ const MyOrder = () => {
           setMyOrder(data);
         });
     }
-  }, [navigate, user]);
-  console.log(myOrder.length);
+  }, [myOrder, navigate, user]);
   return (
     <div>
-      <h2 className="bg-red-400">My Order</h2>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Order Quantity</th>
-              <th>Price</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Pay</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {myOrder.map((order, index) => (
-              <Order order={order} key={order._id} index={index} />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {myOrder.length === 0 ? (
+        <h2 className="text-3xl font-bold text-yellow-400">
+          No Order Available
+        </h2>
+      ) : (
+        <div class="overflow-x-auto">
+          <h2 className="text-3xl font-bold mb-3 screen-full">My Order</h2>
+          <table class="table w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Order Quantity</th>
+                <th>Price</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Pay</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myOrder.map((order, index) => (
+                <Order order={order} key={order._id} index={index} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,34 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const Order = ({ order, index }) => {
-  const { name, email, price, orderProduct, phone, address } = order;
+  const { name, email, price, orderProduct, phone, address, _id } = order;
+  const handleOrderDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Delete This Order",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/order/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+        Swal.fire(
+          "Deleted!",
+          "Your Order has been deleted SuccessFull.",
+          "success"
+        );
+      }
+    });
+  };
   return (
     <tr>
       <th>{index + 1}</th>
@@ -15,7 +42,10 @@ const Order = ({ order, index }) => {
         <button class="btn btn-success btn-sm">Pay Now</button>
       </td>
       <td>
-        <button class="btn btn-circle btn-outline btn-error">
+        <button
+          class="btn btn-circle btn-outline btn-error"
+          onClick={() => handleOrderDelete(_id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
