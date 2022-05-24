@@ -1,31 +1,38 @@
 import { useState, useRef } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
-const Review = () => {
-  const [isRadio, setIsRadio] = useState(5);
-  const [selectStar, setSelectStar] = useState(0);
-  const [user] = useAuthState(auth);
+const AddProduct = () => {
   const [file, setFile] = useState();
-  const countryRef = useRef("");
+  const nameRef = useRef("");
+  const priceRef = useRef("");
+  const quantityRef = useRef("");
   const descriptionRef = useRef("");
-  // FIND TODAY DATE MONTH YEAR
-  let dateObj = new Date();
-  let shortMonth = dateObj.toLocaleString("en-us", { month: "short" });
-  let myDate =
-    shortMonth + " " + dateObj.getUTCDate() + "," + dateObj.getUTCFullYear();
-  // ADD REVIEW
-  const handleReviewSubmit = (e) => {
+  // ADD PRODUCT
+  const handleAddProduct = (e) => {
     e.preventDefault();
-    const countryName = countryRef.current.value;
+    const name = nameRef.current.value;
+    const price = priceRef.current.value;
+    const quantity = quantityRef.current.value;
     const description = descriptionRef.current.value;
+    if (isNaN(price)) {
+      return toast.error("Price Must Be A Number");
+    }
+    if (isNaN(quantity)) {
+      return toast.error("Quantity Must Be A Number");
+    }
     if (!file || file === undefined) {
       return toast.error("Please Select Image And Try Again");
     }
+    if (file.size >= 1000000) {
+      console.log(file.size);
+      return Swal.fire({
+        icon: "info",
+        text: "File size must not exceed 2000 KB",
+      });
+    }
     const image = file;
     console.log("image", image);
-    const name = user?.displayName;
     const formData = new FormData();
     formData.append("image", image);
     const imageStorageKey = "fda6ab6214274b735172bdbc386ccc58";
@@ -40,42 +47,35 @@ const Review = () => {
           console.log(result.success);
           const image = result.data.url;
           console.log(image);
-          const review = {
+          const addProduct = {
             image,
             name,
-            myDate,
-            countryName,
-            selectStar,
+            price,
             description,
+            quantity,
           };
-          fetch("http://localhost:5000/review", {
+          fetch("http://localhost:5000/product", {
             method: "POST",
             headers: {
               "content-type": "application/json",
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body: JSON.stringify(review),
+            body: JSON.stringify(addProduct),
           })
             .then((res) => res.json())
             .then((inserted) => {
               console.log(inserted);
               if (inserted.insertedId) {
-                toast.success("Add Review SuccessFull");
+                toast.success("Product Added SuccessFull");
                 e.target.reset();
               } else {
-                toast.error("Review Add Fail Please Try Again");
+                toast.error("Product Add Fail Please Try Again");
               }
               console.log(inserted);
             });
         }
         console.log("Success:", result);
       });
-  };
-  // GET RATING VALUE
-  const handleChange = (e) => {
-    const star = e.currentTarget.value;
-    setIsRadio(+star);
-    setSelectStar(star);
   };
   // GET IMAGE FILE VALUE
   const handleUrlChange = (e) => {
@@ -87,104 +87,58 @@ const Review = () => {
       <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">
         <div class="card-body">
           <h2 class="text-center font-bold text-2xl text-yellow-400">
-            Add Review
+            Add Product
           </h2>
-          <form onSubmit={handleReviewSubmit}>
+          <form onSubmit={handleAddProduct}>
             <div class="form-control w-full max-w-xs">
-              <label class="label">
+              <label htmlFor="name" class="label">
                 <span class="label-text">Name</span>
               </label>
               <input
-                value={user?.displayName}
-                disabled
+                required
+                id="name"
+                type="text"
+                placeholder="Enter Product Name"
+                ref={nameRef}
                 class="input input-bordered w-full max-w-xs"
               />
             </div>
             <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Date</span>
+              <label htmlFor="price" class="label">
+                <span class="label-text">Price</span>
               </label>
               <input
-                value={myDate}
-                disabled
+                requuired
+                placeholder="Enter Product Price"
+                id="price"
+                ref={priceRef}
+                type="tel"
                 class="input input-bordered w-full max-w-xs"
               />
             </div>
             <div class="form-control w-full max-w-xs">
-              <label htmlFor="country" class="label">
-                <span class="label-text">Country Name</span>
+              <label htmlFor="quantity" class="label">
+                <span class="label-text">Quantity</span>
               </label>
               <input
                 required
-                ref={countryRef}
-                id="country"
-                type="text"
-                placeholder="Enter Your Country"
+                placeholder="Enter Product Quantity"
+                id="quantity"
+                ref={quantityRef}
+                type="tel"
                 class="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs mx-auto my-5">
-              <label htmlFor="country" class="label">
-                <span class="label-text">Rating</span>
-              </label>
-              <div class="rating rating-lg mx-auto">
-                <input
-                  type="radio"
-                  name="rating-8"
-                  id="radio1"
-                  value="1"
-                  onChange={handleChange}
-                  checked={isRadio === 1}
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="rating-8"
-                  id="radio2"
-                  value="2"
-                  onChange={handleChange}
-                  checked={isRadio === 2}
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="rating-8"
-                  id="radio3"
-                  value="3"
-                  onChange={handleChange}
-                  checked={isRadio === 3}
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="rating-8"
-                  id="radio4"
-                  value="4"
-                  onChange={handleChange}
-                  checked={isRadio === 4}
-                  class="mask mask-star-2 bg-orange-400"
-                />
-                <input
-                  type="radio"
-                  name="rating-8"
-                  id="radio5"
-                  value="5"
-                  onChange={handleChange}
-                  checked={isRadio === 5}
-                  class="mask mask-star-2 bg-orange-400"
-                />
-              </div>
-            </div>
             <div class="form-control w-full max-w-xs">
               <label htmlFor="description" class="label">
-                <span class="label-text">Your Comment</span>
+                <span class="label-text">Product Description</span>
               </label>
               <textarea
                 required
                 ref={descriptionRef}
                 id="description"
                 class="textarea textarea-primary h-40"
-                placeholder="Enter Comment"
+                placeholder="Enter Product Description"
               ></textarea>
             </div>
             <div class="flex justify-center items-center w-full mt-6">
@@ -224,6 +178,9 @@ const Review = () => {
                 />
               </label>
             </div>
+            <small className="text-red-500 text-left">
+              File size must not exceed 2000 KB
+            </small>
             <div class="divider">OR</div>
             <button type="submit" class="btn btn-warning ">
               Add Review
@@ -235,4 +192,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default AddProduct;

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import auth from "../../firebase.init";
+import useAdmin from "../Hooks/useAdmin";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const Purchase = () => {
@@ -13,6 +14,7 @@ const Purchase = () => {
   const addQuantityRef = useRef("");
   const { productId } = useParams();
   const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const {
     data: productDetails,
     isLoading,
@@ -187,27 +189,29 @@ const Purchase = () => {
           </form>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-2xl mx-auto">
-        <div class="card-body">
-          <h2 class="text-center text-yellow-400 text-3xl font-bold">
-            Add Product Quantity
-          </h2>
-          <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
-          <form onSubmit={handleQuantityAdd}>
-            <input
-              ref={addQuantityRef}
-              type="text"
-              placeholder="Add Product Quantity"
-              class="input input-bordered w-full max-w-xs"
-            />
-            <div class="card-actions justify-center">
-              <button class="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
-                Add Quantity
-              </button>
-            </div>
-          </form>
+      {admin && (
+        <div class="card w-96 bg-base-100 shadow-2xl mx-auto">
+          <div class="card-body">
+            <h2 class="text-center text-yellow-400 text-3xl font-bold">
+              Add Product Quantity
+            </h2>
+            <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
+            <form onSubmit={handleQuantityAdd}>
+              <input
+                ref={addQuantityRef}
+                type="text"
+                placeholder="Add Product Quantity"
+                class="input input-bordered w-full max-w-xs"
+              />
+              <div class="card-actions justify-center">
+                <button class="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
+                  Add Quantity
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

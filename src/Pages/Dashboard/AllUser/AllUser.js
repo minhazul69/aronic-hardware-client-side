@@ -18,7 +18,6 @@ const AllUser = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  console.log(users.length);
   return (
     <div>
       <div class="overflow-x-auto">
@@ -33,7 +32,12 @@ const AllUser = () => {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <User key={user._id} user={user} index={index} />
+              <User
+                key={user._id}
+                user={user}
+                index={index}
+                refetch={refetch}
+              />
             ))}
           </tbody>
         </table>
