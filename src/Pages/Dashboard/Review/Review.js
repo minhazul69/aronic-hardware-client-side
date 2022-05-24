@@ -2,14 +2,17 @@ import { useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast from "react-hot-toast";
+import Spinner from "../../Shared/Spinner/Spinner";
 
 const Review = () => {
   const [isRadio, setIsRadio] = useState(5);
-  const [selectStar, setSelectStar] = useState(0);
+  const [selectStar, setSelectStar] = useState(5);
   const [user] = useAuthState(auth);
   const [file, setFile] = useState();
   const countryRef = useRef("");
   const descriptionRef = useRef("");
+  const [waiting, setWaiting] = useState(false);
+
   // FIND TODAY DATE MONTH YEAR
   let dateObj = new Date();
   let shortMonth = dateObj.toLocaleString("en-us", { month: "short" });
@@ -17,6 +20,7 @@ const Review = () => {
     shortMonth + " " + dateObj.getUTCDate() + "," + dateObj.getUTCFullYear();
   // ADD REVIEW
   const handleReviewSubmit = (e) => {
+    setWaiting(true);
     e.preventDefault();
     const countryName = countryRef.current.value;
     const description = descriptionRef.current.value;
@@ -66,6 +70,7 @@ const Review = () => {
                 toast.error("Review Add Fail Please Try Again");
               }
               console.log(inserted);
+              setWaiting(false);
             });
         }
         console.log("Success:", result);
@@ -82,6 +87,10 @@ const Review = () => {
     const [f] = e.target.files;
     setFile(f);
   };
+
+  if (waiting) {
+    return <Spinner />;
+  }
   return (
     <div>
       <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">

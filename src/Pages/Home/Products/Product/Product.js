@@ -14,7 +14,7 @@ const Product = ({ product }) => {
       <div className="card-body">
         <h2 className="text-center text-2xl font-bold">{name}</h2>
         <p className="font-bold text-xl text-red-500">Price: ${price}</p>
-        <p>{description.slice(0, 150) + "...Read More"}</p>
+        <p>{description.slice(0, 80) + "...Read More"}</p>
         <p className="text-1xl text-yellow-400 font-bold">
           {" "}
           Available Quantity: {quantity}

@@ -128,7 +128,7 @@ const Purchase = () => {
   return (
     <div className="lg:px-12">
       <div className="card lg:card-side bg-base-100 my-16 shadow-2xl">
-        <figure>
+        <figure className="lg:w-2/4">
           <img src={image} alt={name} />
         </figure>
         <div className="card-body  lg:w-2/4 bg-base-200 justify-center">
