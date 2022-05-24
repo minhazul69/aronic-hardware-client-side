@@ -18,6 +18,8 @@ import AllUser from "./Pages/Dashboard/AllUser/AllUser";
 import AddProduct from "./Pages/Dashboard/AddProduct/AddProduct";
 import ManageProduct from "./Pages/Dashboard/ManageProduct/ManageProduct";
 import AllProduct from "./Pages/AllProduct/AllProduct";
+import AllOrders from "./Pages/Dashboard/AllOrders/AllOrders";
+import EditProfile from "./Pages/Dashboard/MyProfile/EditProfile/EditProfile";
 
 function App() {
   return (
@@ -26,6 +28,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/allProduct" element={<AllProduct />} />
+        <Route
+          path="/editProfile"
+          element={
+            <RequireAuth>
+              <EditProfile />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/product/:productId"
           element={
@@ -48,6 +58,7 @@ function App() {
           <Route path="allUer" element={<AllUser />} />
           <Route path="addProduct" element={<AddProduct />} />
           <Route path="manageProduct" element={<ManageProduct />} />
+          <Route path="allOrders" element={<AllOrders />} />
         </Route>
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />

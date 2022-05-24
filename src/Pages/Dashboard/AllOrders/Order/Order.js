@@ -1,9 +1,9 @@
 import React from "react";
 import Swal from "sweetalert2";
 
-const Order = ({ order, index }) => {
-  const { name, email, price, orderProduct, _id } = order;
-  const handleOrderDelete = (id) => {
+const Order = ({ order, index, refetch }) => {
+  const { name, email, _id } = order;
+  const handleDeleteOrder = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You Delete This Order",
@@ -23,6 +23,7 @@ const Order = ({ order, index }) => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            refetch();
           });
         Swal.fire(
           "Deleted!",
@@ -35,18 +36,15 @@ const Order = ({ order, index }) => {
   return (
     <tr>
       <th>{index + 1}</th>
-      <td>{name}</td>
       <td>{email}</td>
-      <td>{orderProduct}</td>
-      <td>{price}</td>
-
+      <td>{name}</td>
       <td>
-        <button class="btn btn-success btn-sm">Pay Now</button>
+        <button class="btn btn-sm btn-warning">Small</button>
       </td>
       <td>
         <button
+          onClick={() => handleDeleteOrder(_id)}
           class="btn btn-circle btn-outline btn-error"
-          onClick={() => handleOrderDelete(_id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

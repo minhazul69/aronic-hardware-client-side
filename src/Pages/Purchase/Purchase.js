@@ -50,6 +50,8 @@ const Purchase = () => {
         "Your Order Quantity Must Be Less Then Available Quantity"
       );
     }
+    const totalPrice = parseInt(price) * parseInt(orderProduct);
+
     const newQuantity = quantity - orderProduct;
     const email = user?.email;
     const order = {
@@ -57,11 +59,12 @@ const Purchase = () => {
       name,
       image,
       description,
-      price,
+      price: totalPrice,
       orderProduct,
       phone,
       address,
     };
+    console.log(order);
     fetch("http://localhost:5000/order", {
       method: "POST",
       headers: {
@@ -85,9 +88,9 @@ const Purchase = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data) {
-                refetch();
                 toast.success("Your Order Added SuccessFull");
                 e.target.reset();
+                refetch();
                 console.log(data);
               }
             });
