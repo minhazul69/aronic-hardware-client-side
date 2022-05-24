@@ -140,54 +140,72 @@ const Purchase = () => {
           </h2>
           <h3 className="font-bold text-xl text-red-500">Price: ${price}</h3>
           <h3>{description}</h3>
-          <h3 className="text-1xl text-yellow-400 font-bold mt-3">
-            {" "}
-            Available Quantity: {quantity}
-          </h3>
-          <h3 className="text-1xl text-red-400 mb-8">
-            Minimum Order Quantity: 100
-          </h3>
+          {quantity === 0 ? (
+            <h2 className="font-bold text-xl text-red-600">Product Sold</h2>
+          ) : (
+            <>
+              <h3 className="text-1xl text-yellow-400 font-bold mt-3">
+                {" "}
+                Available Quantity: {quantity}
+              </h3>
+              <h3 className="text-1xl text-red-400 mb-8">
+                Minimum Order Quantity: 100
+              </h3>
+            </>
+          )}
           <form onSubmit={handleOrderQuantity}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-5">
-              <div class="form-control w-full max-w-xs">
-                <label class="label">
-                  <span class="label-text">Phone Number</span>
-                </label>
-                <input
-                  ref={phoneRef}
-                  type="tel"
-                  placeholder="Enter Your Phone Number"
-                  class="input input-bordered w-full max-w-xs border-0"
-                />
-              </div>
-              <div class="form-control w-full max-w-xs">
-                <label class="label">
-                  <span class="label-text">Address</span>
-                </label>
-                <input
-                  ref={addressRef}
-                  type="text"
-                  placeholder="Enter Your Address"
-                  class="input input-bordered w-full max-w-xs border-0"
-                />
-              </div>
-            </div>
-            <div class="form-control w-full max-w-xs mx-auto">
-              <label htmlFor="quantity" class="label">
-                <span class="label-text">Quantity</span>
-              </label>
-              <input
-                id="quantity"
-                ref={quantityRef}
-                type="text"
-                placeholder="Type Quantity"
-                className="input input-bordered w-full max-w-xs border-0"
-              />
-            </div>
+            {quantity === 0 ? (
+              ""
+            ) : (
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-5">
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text">Phone Number</span>
+                    </label>
+                    <input
+                      ref={phoneRef}
+                      type="tel"
+                      placeholder="Enter Your Phone Number"
+                      class="input input-bordered w-full max-w-xs border-0"
+                    />
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text">Address</span>
+                    </label>
+                    <input
+                      ref={addressRef}
+                      type="text"
+                      placeholder="Enter Your Address"
+                      class="input input-bordered w-full max-w-xs border-0"
+                    />
+                  </div>
+                </div>
+                <div class="form-control w-full max-w-xs mx-auto">
+                  <label htmlFor="quantity" class="label">
+                    <span class="label-text">Quantity</span>
+                  </label>
+                  <input
+                    id="quantity"
+                    ref={quantityRef}
+                    type="text"
+                    placeholder="Type Quantity"
+                    className="input input-bordered w-full max-w-xs border-0"
+                  />
+                </div>
+              </>
+            )}
             <div className="card-actions justify-center mt-10">
-              <button type="submit" className="btn btn-primary">
-                Purchase Now
-              </button>
+              {quantity === 0 ? (
+                <button className="btn bg-red-400 btn-wide" disabled>
+                  Sold
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-primary">
+                  Purchase Now
+                </button>
+              )}
             </div>
           </form>
         </div>

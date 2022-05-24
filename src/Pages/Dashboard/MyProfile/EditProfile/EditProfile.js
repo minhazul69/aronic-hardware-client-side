@@ -107,7 +107,6 @@ const EditProfile = () => {
   if (isLoading || loading) {
     return <Spinner />;
   }
-  const { phone, linkedin, facebook, address, education } = profile[0];
   return (
     <div>
       <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">
@@ -143,7 +142,9 @@ const EditProfile = () => {
               </label>
               <input
                 required
-                placeholder={address ? address : " Enter Your Address"}
+                placeholder={
+                  profile[0] ? profile[0].address : " Enter Your Address"
+                }
                 id="address"
                 ref={addressRef}
                 type="text"
@@ -156,7 +157,9 @@ const EditProfile = () => {
               </label>
               <input
                 required
-                placeholder={phone ? phone : "Enter Phone Number"}
+                placeholder={
+                  profile[0] ? profile[0].phone : "Enter Phone Number"
+                }
                 id="phone"
                 ref={phoneRef}
                 type="tel"
@@ -169,7 +172,9 @@ const EditProfile = () => {
               </label>
               <input
                 required
-                placeholder={education ? education : "Enter Your Education"}
+                placeholder={
+                  profile[0] ? profile[0].education : "Enter Your Education"
+                }
                 id="education"
                 ref={educationRef}
                 type="tel"
@@ -183,7 +188,9 @@ const EditProfile = () => {
               <input
                 required
                 placeholder={
-                  linkedin ? linkedin : "Enter Linkedin Profile Link"
+                  profile[0]
+                    ? profile[0].linkedin
+                    : "Enter Linkedin Profile Link"
                 }
                 id="linkedin"
                 ref={linkedinRef}
@@ -198,7 +205,9 @@ const EditProfile = () => {
               <input
                 required
                 placeholder={
-                  facebook ? facebook : "Enter Facebook Profile Link"
+                  profile[0]
+                    ? profile[0].facebook
+                    : "Enter Facebook Profile Link"
                 }
                 id="facebook"
                 ref={facebookRef}

@@ -17,7 +17,7 @@ const MyProfile = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  const { phone, address, education, facebook, image, linkedin } = profile[0];
+
   const noImg =
     "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
   return (
@@ -30,7 +30,10 @@ const MyProfile = () => {
           <div className="mt-10">
             <div class="avatar online  mb-7">
               <div class="w-24 rounded-full">
-                <img src={image ? image : noImg} alt={user.display} />
+                <img
+                  src={profile[0] ? profile[0].image : noImg}
+                  alt={user.display}
+                />
               </div>
             </div>
             <div className="text-left rounded-xl p-5 bg-white">
@@ -51,7 +54,7 @@ const MyProfile = () => {
                 </span>
                 <br />
                 <span className="font-bold text-xl">
-                  {address ? address : "Please Add Your Address"}
+                  {profile[0] ? profile[0].address : "Please Add Your Address"}
                 </span>
               </h2>
               <h2 className="mt-7">
@@ -59,7 +62,9 @@ const MyProfile = () => {
                 <br />
                 <span className="font-bold text-xl">
                   {" "}
-                  {phone ? phone : "Please Add Your Phone Number"}
+                  {profile[0]
+                    ? profile[0].phone
+                    : "Please Add Your Phone Number"}
                 </span>
               </h2>
               <h2 className="mt-7">
@@ -70,7 +75,9 @@ const MyProfile = () => {
                 <br />
                 <span className="font-bold text-xl">
                   {" "}
-                  {education ? education : "Please Add Your Education"}
+                  {profile[0]
+                    ? profile[0].education
+                    : "Please Add Your Education"}
                 </span>
               </h2>
               <h2 className="mt-7">
@@ -81,8 +88,8 @@ const MyProfile = () => {
                 <br />
                 <span className="font-bold text-xl">
                   {" "}
-                  {linkedin
-                    ? linkedin
+                  {profile[0]
+                    ? profile[0].linkedin
                     : "Please Add Your Linkedin Profile Link"}
                 </span>
               </h2>
@@ -94,8 +101,8 @@ const MyProfile = () => {
                 <br />
                 <span className="font-bold text-xl">
                   {" "}
-                  {facebook
-                    ? facebook
+                  {profile[0]
+                    ? profile[0].facebook
                     : "Please Add Your Facebook Profile Link"}
                 </span>
               </h2>

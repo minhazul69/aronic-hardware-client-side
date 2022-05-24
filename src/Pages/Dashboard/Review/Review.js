@@ -3,16 +3,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast from "react-hot-toast";
 import Spinner from "../../Shared/Spinner/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
   const [isRadio, setIsRadio] = useState(5);
-  const [selectStar, setSelectStar] = useState(5);
+  const [rating, setRating] = useState(5);
   const [user] = useAuthState(auth);
   const [file, setFile] = useState();
   const countryRef = useRef("");
   const descriptionRef = useRef("");
   const [waiting, setWaiting] = useState(false);
-
+  const navigate = useNavigate();
   // FIND TODAY DATE MONTH YEAR
   let dateObj = new Date();
   let shortMonth = dateObj.toLocaleString("en-us", { month: "short" });
@@ -49,7 +50,7 @@ const Review = () => {
             name,
             myDate,
             countryName,
-            selectStar,
+            rating,
             description,
           };
           fetch("http://localhost:5000/review", {
@@ -64,7 +65,8 @@ const Review = () => {
             .then((inserted) => {
               console.log(inserted);
               if (inserted.insertedId) {
-                toast.success("Add Review SuccessFull");
+                toast.success("Thanks For Adding Review ");
+                navigate("/");
                 e.target.reset();
               } else {
                 toast.error("Review Add Fail Please Try Again");
@@ -80,7 +82,7 @@ const Review = () => {
   const handleChange = (e) => {
     const star = e.currentTarget.value;
     setIsRadio(+star);
-    setSelectStar(star);
+    setRating(star);
   };
   // GET IMAGE FILE VALUE
   const handleUrlChange = (e) => {

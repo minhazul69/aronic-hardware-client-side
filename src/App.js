@@ -20,6 +20,7 @@ import ManageProduct from "./Pages/Dashboard/ManageProduct/ManageProduct";
 import AllProduct from "./Pages/AllProduct/AllProduct";
 import AllOrders from "./Pages/Dashboard/AllOrders/AllOrders";
 import EditProfile from "./Pages/Dashboard/MyProfile/EditProfile/EditProfile";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       <Toaster />

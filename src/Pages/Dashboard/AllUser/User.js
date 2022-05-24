@@ -68,6 +68,7 @@ const User = ({ user, index, refetch }) => {
             })
             .then((data) => {
               console.log(data);
+              refetch();
             });
           swalWithBootstrapButtons.fire(
             "Deleted!",

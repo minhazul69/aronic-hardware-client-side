@@ -1,25 +1,25 @@
 import React from "react";
 
 const Review = ({ review }) => {
-  const { name, img, country, description, date, rating } = review;
+  const { name, image, countryName, description, myDate, rating } = review;
   return (
     <div className="card w-96 bg-base-100 shadow-xl px-6">
       <div className="card-body">
         <div className="flex items-center">
           <div className="avatar mr-3">
             <div className="w-16 rounded-full">
-              <img src={img} alt={name} />
+              <img src={image} alt={name} />
             </div>
           </div>
           <div>
             <h2 className="font-bold">{name}</h2>
-            <h2 className="text-left text-primary">{country}</h2>
+            <h2 className="text-left text-primary">{countryName}</h2>
           </div>
         </div>
-        <p className="text-left">``{description}``</p>
-        <p className="text-left font-bold text-slate-400">{date}</p>
+        <p className="text-left">``{description.slice(0, 120)}``</p>
+        <p className="text-left font-bold text-slate-400">{myDate}</p>
         <p className="text-left">
-          <Rating ratings={rating}></Rating>
+          <Rating ratings={parseInt(rating)}></Rating>
         </p>
       </div>
     </div>
