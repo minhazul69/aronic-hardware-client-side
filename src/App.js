@@ -21,6 +21,8 @@ import AllProduct from "./Pages/AllProduct/AllProduct";
 import AllOrders from "./Pages/Dashboard/AllOrders/AllOrders";
 import EditProfile from "./Pages/Dashboard/MyProfile/EditProfile/EditProfile";
 import NotFound from "./Pages/NotFound/NotFound";
+import Payment from "./Pages/Dashboard/Payment/Payment";
+import RequireAdmin from "./Pages/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -53,13 +55,70 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route index element={<MyOrder />} />
-          <Route path="review" element={<Review />} />
-          <Route path="myProfile" element={<MyProfile />} />
-          <Route path="allUer" element={<AllUser />} />
-          <Route path="addProduct" element={<AddProduct />} />
-          <Route path="manageProduct" element={<ManageProduct />} />
-          <Route path="allOrders" element={<AllOrders />} />
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <MyOrder />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="review"
+            element={
+              <RequireAuth>
+                <Review />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="myProfile"
+            element={
+              <RequireAuth>
+                <MyProfile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="allUer"
+            element={
+              <RequireAdmin>
+                <AllUser />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="addProduct"
+            element={
+              <RequireAdmin>
+                <AddProduct />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageProduct"
+            element={
+              <RequireAdmin>
+                <ManageProduct />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="allOrders"
+            element={
+              <RequireAdmin>
+                <AllOrders />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="payment/:id"
+            element={
+              <RequireAuth>
+                <Payment />
+              </RequireAuth>
+            }
+          />
         </Route>
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />

@@ -22,14 +22,14 @@ const MyProfile = () => {
     "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
   return (
     <div>
-      <div class="card lg:w-2/4  shadow-xl mx-auto bg-base-200">
-        <div class="card-body">
-          <h2 class="text-center font-bold text-xl text-yellow-400">
+      <div className="card lg:w-2/4  shadow-xl mx-auto bg-base-200">
+        <div className="card-body">
+          <h2 className="text-center font-bold text-xl text-yellow-400">
             Update Profile
           </h2>
           <div className="mt-10">
-            <div class="avatar online  mb-7">
-              <div class="w-24 rounded-full">
+            <div className="avatar online  mb-7">
+              <div className="w-24 rounded-full">
                 <img
                   src={profile[0] ? profile[0].image : noImg}
                   alt={user.display}
@@ -108,8 +108,8 @@ const MyProfile = () => {
               </h2>
             </div>
           </div>
-          <div class="card-actions justify-center mt-4">
-            <Link to="/editProfile" class="btn btn-warning">
+          <div className="card-actions justify-center mt-4">
+            <Link to="/editProfile" className="btn btn-warning">
               Edit Profile
             </Link>
           </div>

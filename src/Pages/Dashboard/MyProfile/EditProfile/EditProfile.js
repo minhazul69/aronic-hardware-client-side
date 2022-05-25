@@ -109,36 +109,36 @@ const EditProfile = () => {
   }
   return (
     <div>
-      <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">
-        <div class="card-body">
-          <h2 class="text-center font-bold text-2xl text-yellow-400">
+      <div className="card w-96 bg-base-100 shadow-xl mx-auto my-10">
+        <div className="card-body">
+          <h2 className="text-center font-bold text-2xl text-yellow-400">
             Edit Product
           </h2>
           <form onSubmit={handleEditProfile}>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="name" class="label">
-                <span class="label-text">Name</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="name" className="label">
+                <span className="label-text">Name</span>
               </label>
               <input
                 value={user?.displayName}
                 disabled
                 placeholder="Enter Product Name"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="price" class="label">
-                <span class="label-text">Email</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="price" className="label">
+                <span className="label-text">Email</span>
               </label>
               <input
                 value={user?.email}
                 disabled
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="address" class="label">
-                <span class="label-text">Address</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="address" className="label">
+                <span className="label-text">Address</span>
               </label>
               <input
                 required
@@ -148,12 +148,12 @@ const EditProfile = () => {
                 id="address"
                 ref={addressRef}
                 type="text"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="phone" class="label">
-                <span class="label-text">Phone</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="phone" className="label">
+                <span className="label-text">Phone</span>
               </label>
               <input
                 required
@@ -163,12 +163,12 @@ const EditProfile = () => {
                 id="phone"
                 ref={phoneRef}
                 type="tel"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="education" class="label">
-                <span class="label-text">Education</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="education" className="label">
+                <span className="label-text">Education</span>
               </label>
               <input
                 required
@@ -178,12 +178,12 @@ const EditProfile = () => {
                 id="education"
                 ref={educationRef}
                 type="tel"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="linkedin" class="label">
-                <span class="label-text">Linkedin</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="linkedin" className="label">
+                <span className="label-text">Linkedin</span>
               </label>
               <input
                 required
@@ -195,12 +195,12 @@ const EditProfile = () => {
                 id="linkedin"
                 ref={linkedinRef}
                 type="tel"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="facebook" class="label">
-                <span class="label-text">Facebook</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="facebook" className="label">
+                <span className="label-text">Facebook</span>
               </label>
               <input
                 required
@@ -212,17 +212,17 @@ const EditProfile = () => {
                 id="facebook"
                 ref={facebookRef}
                 type="tel"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="flex justify-center items-center w-full mt-6">
+            <div className="flex justify-center items-center w-full mt-6">
               <label
                 for="dropzone-file"
-                class="flex flex-col justify-center items-center w-full h-28 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                className="flex flex-col justify-center items-center w-full h-28 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
-                <div class="flex flex-col justify-center items-center pt-5 pb-6 ">
+                <div className="flex flex-col justify-center items-center pt-5 pb-6 ">
                   <svg
-                    class="mb-3 w-10 h-10 text-gray-400"
+                    className="mb-3 w-10 h-10 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -235,11 +235,11 @@ const EditProfile = () => {
                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     ></path>
                   </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
                   </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
@@ -248,15 +248,15 @@ const EditProfile = () => {
                   multiple={false}
                   id="dropzone-file"
                   type="file"
-                  class="hidden"
+                  className="hidden"
                 />
               </label>
             </div>
             <small className="text-red-500 text-left">
               File size must not exceed 2000 KB
             </small>
-            <div class="divider">OR</div>
-            <button type="submit" class="btn btn-warning ">
+            <div className="divider">OR</div>
+            <button type="submit" className="btn btn-warning ">
               Add Review
             </button>
           </form>

@@ -1,8 +1,10 @@
 import React from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Order = ({ order, index }) => {
-  const { name, email, price, orderProduct, _id } = order;
+  const { name, email, price, orderProduct, _id, status, transactionId } =
+    order;
   const handleOrderDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -41,16 +43,35 @@ const Order = ({ order, index }) => {
       <td>{price}</td>
 
       <td>
-        <button class="btn btn-success btn-sm">Pay Now</button>
+        {status ? (
+          <>
+            <p className="font-bold">PAID</p>
+            <p>
+              <small>
+                {" "}
+                <span className="font-bold text-yellow-400">XID: </span>
+                {transactionId}
+              </small>
+            </p>
+          </>
+        ) : (
+          <Link
+            to={`/dashboard/payment/${_id}`}
+            className="btn btn-success btn-sm"
+          >
+            Pay Now
+          </Link>
+        )}
       </td>
       <td>
         <button
-          class="btn btn-circle btn-outline btn-error"
+          className="btn btn-circle btn-outline btn-error"
           onClick={() => handleOrderDelete(_id)}
+          disabled={status}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

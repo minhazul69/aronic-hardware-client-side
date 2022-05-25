@@ -18,9 +18,9 @@ const Review = ({ review }) => {
         </div>
         <p className="text-left">``{description.slice(0, 120)}``</p>
         <p className="text-left font-bold text-slate-400">{myDate}</p>
-        <p className="text-left">
+        <div className="text-left">
           <Rating ratings={parseInt(rating)}></Rating>
-        </p>
+        </div>
       </div>
     </div>
   );

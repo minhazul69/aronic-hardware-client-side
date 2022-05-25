@@ -19,14 +19,13 @@ const GoogleLogin = () => {
     }
   }, [googleError]);
   const [token] = useToken(user);
-  if (user) {
-    navigate(from, { replace: true });
-  }
+
   useEffect(() => {
     if (token) {
       setTimeout(() => {
         toast.success("User Login SuccessFull");
       }, 1000);
+      navigate(from, { replace: true });
     }
   }, [token, from, navigate]);
   if (googleLoading) {

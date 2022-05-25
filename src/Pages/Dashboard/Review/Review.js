@@ -95,35 +95,35 @@ const Review = () => {
   }
   return (
     <div>
-      <div class="card w-96 bg-base-100 shadow-xl mx-auto my-10">
-        <div class="card-body">
-          <h2 class="text-center font-bold text-2xl text-yellow-400">
+      <div className="card w-96 bg-base-100 shadow-xl mx-auto my-10">
+        <div className="card-body">
+          <h2 className="text-center font-bold text-2xl text-yellow-400">
             Add Review
           </h2>
           <form onSubmit={handleReviewSubmit}>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Name</span>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Name</span>
               </label>
               <input
                 value={user?.displayName}
                 disabled
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Date</span>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Date</span>
               </label>
               <input
                 value={myDate}
                 disabled
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="country" class="label">
-                <span class="label-text">Country Name</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="country" className="label">
+                <span className="label-text">Country Name</span>
               </label>
               <input
                 required
@@ -131,14 +131,14 @@ const Review = () => {
                 id="country"
                 type="text"
                 placeholder="Enter Your Country"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div class="form-control w-full max-w-xs mx-auto my-5">
-              <label htmlFor="country" class="label">
-                <span class="label-text">Rating</span>
+            <div className="form-control w-full max-w-xs mx-auto my-5">
+              <label htmlFor="country" className="label">
+                <span className="label-text">Rating</span>
               </label>
-              <div class="rating rating-lg mx-auto">
+              <div className="rating rating-lg mx-auto">
                 <input
                   type="radio"
                   name="rating-8"
@@ -146,7 +146,7 @@ const Review = () => {
                   value="1"
                   onChange={handleChange}
                   checked={isRadio === 1}
-                  class="mask mask-star-2 bg-orange-400"
+                  className="mask mask-star-2 bg-orange-400"
                 />
                 <input
                   type="radio"
@@ -155,7 +155,7 @@ const Review = () => {
                   value="2"
                   onChange={handleChange}
                   checked={isRadio === 2}
-                  class="mask mask-star-2 bg-orange-400"
+                  className="mask mask-star-2 bg-orange-400"
                 />
                 <input
                   type="radio"
@@ -164,7 +164,7 @@ const Review = () => {
                   value="3"
                   onChange={handleChange}
                   checked={isRadio === 3}
-                  class="mask mask-star-2 bg-orange-400"
+                  className="mask mask-star-2 bg-orange-400"
                 />
                 <input
                   type="radio"
@@ -173,7 +173,7 @@ const Review = () => {
                   value="4"
                   onChange={handleChange}
                   checked={isRadio === 4}
-                  class="mask mask-star-2 bg-orange-400"
+                  className="mask mask-star-2 bg-orange-400"
                 />
                 <input
                   type="radio"
@@ -182,30 +182,30 @@ const Review = () => {
                   value="5"
                   onChange={handleChange}
                   checked={isRadio === 5}
-                  class="mask mask-star-2 bg-orange-400"
+                  className="mask mask-star-2 bg-orange-400"
                 />
               </div>
             </div>
-            <div class="form-control w-full max-w-xs">
-              <label htmlFor="description" class="label">
-                <span class="label-text">Your Comment</span>
+            <div className="form-control w-full max-w-xs">
+              <label htmlFor="description" className="label">
+                <span className="label-text">Your Comment</span>
               </label>
               <textarea
                 required
                 ref={descriptionRef}
                 id="description"
-                class="textarea textarea-primary h-40"
+                className="textarea textarea-primary h-40"
                 placeholder="Enter Comment"
               ></textarea>
             </div>
-            <div class="flex justify-center items-center w-full mt-6">
+            <div className="flex justify-center items-center w-full mt-6">
               <label
                 for="dropzone-file"
-                class="flex flex-col justify-center items-center w-full h-28 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                className="flex flex-col justify-center items-center w-full h-28 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
               >
-                <div class="flex flex-col justify-center items-center pt-5 pb-6 ">
+                <div className="flex flex-col justify-center items-center pt-5 pb-6 ">
                   <svg
-                    class="mb-3 w-10 h-10 text-gray-400"
+                    className="mb-3 w-10 h-10 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -218,11 +218,11 @@ const Review = () => {
                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     ></path>
                   </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
                   </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
@@ -231,12 +231,12 @@ const Review = () => {
                   multiple={false}
                   id="dropzone-file"
                   type="file"
-                  class="hidden"
+                  className="hidden"
                 />
               </label>
             </div>
-            <div class="divider">OR</div>
-            <button type="submit" class="btn btn-warning ">
+            <div className="divider">OR</div>
+            <button type="submit" className="btn btn-warning ">
               Add Review
             </button>
           </form>

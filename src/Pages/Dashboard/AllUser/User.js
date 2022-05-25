@@ -92,7 +92,7 @@ const User = ({ user, index, refetch }) => {
         {role === "admin" ? (
           <h2 className="font-bold text-red-400">Already Admin</h2>
         ) : (
-          <button onClick={handleMakeAdmin} class="btn btn-sm">
+          <button onClick={handleMakeAdmin} className="btn btn-sm">
             Make Admin
           </button>
         )}
@@ -100,11 +100,11 @@ const User = ({ user, index, refetch }) => {
       <td>
         <button
           onClick={() => handleUserDelete(_id)}
-          class="btn btn-circle btn-outline btn-error"
+          className="btn btn-circle btn-outline btn-error"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

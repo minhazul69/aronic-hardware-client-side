@@ -159,32 +159,32 @@ const Purchase = () => {
             ) : (
               <>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-5">
-                  <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                      <span class="label-text">Phone Number</span>
+                  <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text">Phone Number</span>
                     </label>
                     <input
                       ref={phoneRef}
                       type="tel"
                       placeholder="Enter Your Phone Number"
-                      class="input input-bordered w-full max-w-xs border-0"
+                      className="input input-bordered w-full max-w-xs border-0"
                     />
                   </div>
-                  <div class="form-control w-full max-w-xs">
-                    <label class="label">
-                      <span class="label-text">Address</span>
+                  <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                      <span className="label-text">Address</span>
                     </label>
                     <input
                       ref={addressRef}
                       type="text"
                       placeholder="Enter Your Address"
-                      class="input input-bordered w-full max-w-xs border-0"
+                      className="input input-bordered w-full max-w-xs border-0"
                     />
                   </div>
                 </div>
-                <div class="form-control w-full max-w-xs mx-auto">
-                  <label htmlFor="quantity" class="label">
-                    <span class="label-text">Quantity</span>
+                <div className="form-control w-full max-w-xs mx-auto">
+                  <label htmlFor="quantity" className="label">
+                    <span className="label-text">Quantity</span>
                   </label>
                   <input
                     id="quantity"
@@ -211,9 +211,9 @@ const Purchase = () => {
         </div>
       </div>
       {admin && (
-        <div class="card w-96 bg-base-100 shadow-2xl mx-auto">
-          <div class="card-body">
-            <h2 class="text-center text-yellow-400 text-3xl font-bold">
+        <div className="card w-96 bg-base-100 shadow-2xl mx-auto">
+          <div className="card-body">
+            <h2 className="text-center text-yellow-400 text-3xl font-bold">
               Add Product Quantity
             </h2>
             <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
@@ -222,10 +222,10 @@ const Purchase = () => {
                 ref={addQuantityRef}
                 type="text"
                 placeholder="Add Product Quantity"
-                class="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs"
               />
-              <div class="card-actions justify-center">
-                <button class="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
+              <div className="card-actions justify-center">
+                <button className="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
                   Add Quantity
                 </button>
               </div>

@@ -16,15 +16,14 @@ const ManageProduct = () => {
   }
   return (
     <div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>
               <th>Name</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Panding</th>
               <th>Delete</th>
             </tr>
           </thead>

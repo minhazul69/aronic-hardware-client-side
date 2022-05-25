@@ -37,9 +37,9 @@ const MyOrder = () => {
           No Order Available
         </h2>
       ) : (
-        <div class="overflow-x-auto">
+        <div className="overflow-x-auto">
           <h2 className="text-3xl font-bold mb-3 screen-full">My Order</h2>
-          <table class="table w-full">
+          <table className="table w-full">
             <thead>
               <tr>
                 <th></th>
