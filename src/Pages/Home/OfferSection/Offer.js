@@ -4,7 +4,7 @@ import offerImg2 from "../../../img/img6_770x.webp";
 
 const Offer = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-12 gap-4 mt-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-12 gap-4 mt-10 mx-3 lg:mx-0">
       <div className="card  bg-base-100 shadow-xl items-end image-full">
         <figure className="h-full">
           <img src={offerImg1} alt="Shoes" />

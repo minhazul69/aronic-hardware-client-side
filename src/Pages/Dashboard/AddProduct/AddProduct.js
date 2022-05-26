@@ -84,7 +84,7 @@ const AddProduct = () => {
   };
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl mx-auto my-10">
+      <div className="card w-full lg:w-96 bg-base-100 shadow-xl mx-auto my-10">
         <div className="card-body">
           <h2 className="text-center font-bold text-2xl text-yellow-400">
             Add Product

@@ -11,7 +11,7 @@ const AllProduct = () => {
     return <Spinner />;
   }
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 ">
+    <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5 mx-3 lg:mx-0 lg:px-12  mt-10">
       {products.map((product) => (
         <Product product={product} key={product._id} />
       ))}

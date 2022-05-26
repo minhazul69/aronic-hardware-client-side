@@ -18,7 +18,7 @@ const ReviewSection = () => {
     allReviews.length
   );
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-2 gap-4 lg:px-12 place-items-center my-10">
+    <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 lg:mx-0 mx-3  gap-4 lg:px-12 place-items-center my-10">
       {allReviews &&
         latestReview
           .slice(0, 3)

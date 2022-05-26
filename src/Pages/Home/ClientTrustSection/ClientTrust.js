@@ -11,7 +11,7 @@ const ClientTrust = () => {
         Millions Business Trust Us
       </h1>
       <h4 className="text-2xl">Try TO Understand Users Expectation</h4>
-      <div className="grid gird-cols-1 xl:grid-cols-4 lg:grid-cols-2 gap-4 mt-10">
+      <div className="grid gird-cols-1  lg:grid-cols-4 md:grid-cols-3 gap-4 mt-10 mx-3 lg:mx-0 ">
         <ClientService number="72" img={flag} name="Countries" />
         <ClientService number="535+" img={hardware} name="Complete Projects" />
         <ClientService number="273+" img={user} name="Happy Clients" />
