@@ -31,6 +31,7 @@ const MyProfile = () => {
             <div className="avatar online  mb-7">
               <div className="w-24 rounded-full">
                 <img
+                  className="object-top "
                   src={profile[0] ? profile[0].image : noImg}
                   alt={user.display}
                 />

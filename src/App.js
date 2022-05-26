@@ -23,6 +23,7 @@ import EditProfile from "./Pages/Dashboard/MyProfile/EditProfile/EditProfile";
 import NotFound from "./Pages/NotFound/NotFound";
 import Payment from "./Pages/Dashboard/Payment/Payment";
 import RequireAdmin from "./Pages/RequireAdmin/RequireAdmin";
+import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/myPortfolio" element={<MyPortfolio />} />
         <Route path="/allProduct" element={<AllProduct />} />
         <Route
           path="/editProfile"
