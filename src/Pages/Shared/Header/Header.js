@@ -5,6 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import auth from "../../../firebase.init";
 import "./Header.css";
+import Spinner from "../Spinner/Spinner";
+import { useQuery } from "react-query";
 const Header = () => {
   const [user] = useAuthState(auth);
   const navItem = (
@@ -33,6 +35,18 @@ const Header = () => {
       </li>
     </>
   );
+  const noImg =
+    "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
+  const { data: profile, isLoading } = useQuery("profile", () =>
+    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
+  );
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="lg:px-36 mt-5">
       <div className="flex items-center justify-between">
@@ -42,25 +56,95 @@ const Header = () => {
         </Link>
         <div className="flex items-center">
           {user ? (
-            <button
-              onClick={() => signOut(auth)}
-              className="btn btn-active btn-ghost mr-5"
-            >
-              <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i> Sign
-              Out
-            </button>
+            <>
+              <button
+                onClick={() => signOut(auth)}
+                className="btn btn-active btn-ghost mr-3"
+              >
+                <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>{" "}
+                Sign Out
+              </button>
+              <div className="dropdown dropdown-end">
+                <div class="avatar hover:cursor-pointer" tabIndex="5">
+                  <div class="w-10 rounded-full mr-2">
+                    <img
+                      className="object-top"
+                      src={profile[0] ? profile[0].image : noImg}
+                      alt={user?.displayName}
+                    />
+                  </div>
+                </div>
+                <div
+                  tabIndex="5"
+                  class="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-60 mt-3 pb-2"
+                >
+                  <div class="avatar mx-auto my-3">
+                    <div class="w-24 rounded-full">
+                      <img
+                        className="object-top"
+                        src={profile[0] ? profile[0].image : noImg}
+                        alt={user?.displayName}
+                      />
+                    </div>
+                  </div>
+                  <h2 className="font-bold text-primary mb-3">
+                    {user?.displayName}
+                  </h2>
+                  {profile[0] ? (
+                    <div className="px-1 bg-white rounded-xl">
+                      <div className="text-left mt-4 bg-white p-3 rounded-xl">
+                        <p className="text-yellow-400 font-bold">Email:</p>
+                        <h2 className="font-bold">
+                          <small>{user?.email}</small>
+                        </h2>
+                      </div>
+                      <div className="text-left bg-white p-3 rounded-xl">
+                        <p className="text-yellow-400 font-bold">Phone:</p>
+                        <h2 className="font-bold">
+                          <small>{profile[0].phone}</small>
+                        </h2>
+                      </div>
+
+                      <Link
+                        className="btn btn-primary btn-sm w-full mt-4 "
+                        to="/dashboard/myProfile"
+                      >
+                        My Profile
+                      </Link>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="text-left mt-4 bg-white p-3 rounded-xl">
+                        <p className="text-yellow-400 font-bold">Email:</p>
+                        <h2 className="font-bold">
+                          <small>{user?.email}</small>
+                        </h2>
+                      </div>
+                      <Link
+                        className="btn btn-warning btn-sm w-full mt-4 "
+                        to="/editProfile"
+                      >
+                        Edit Profile
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </>
           ) : (
-            <li className="list-none mr-8">
-              <Link to="/login">
-                <i className="fa-solid fa-user pr-1"></i> Login
-              </Link>
-            </li>
+            <>
+              <li className="list-none mr-8">
+                <Link to="/login">
+                  <i className="fa-solid fa-user pr-1"></i> Login
+                </Link>
+              </li>
+              <li className="list-none">
+                <Link to="/signUp">
+                  <i className="fa-solid fa-user-plus pr-1"></i> Sign Up
+                </Link>
+              </li>
+            </>
           )}
-          <li className="list-none">
-            <Link to="/signUp">
-              <i className="fa-solid fa-user-plus pr-1"></i> Sign Up
-            </Link>
-          </li>
         </div>
       </div>
       <div className="navbar bg-black">
