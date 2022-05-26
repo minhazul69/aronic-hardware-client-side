@@ -77,47 +77,57 @@ const MyPortfolio = () => {
             My Skill
           </h1>
           <div className="text-left">
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               HTML
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               CSS
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               BOOTsTRAP
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               TAILWIND
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               JAVASCRIPT
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               ES 6
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               REACT
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               NODE JS
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               EXPRESS JS
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               FIREBASE
             </button>
-            <button class="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               MATERIAL UI
             </button>
           </div>
         </div>
       </div>
-      <h2 className="text-3xl font-bold text-yellow-400 mt-16">
+      <h2
+        data-aos="flip-up"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="1000"
+        className="text-3xl font-bold text-yellow-400 mt-16"
+      >
         Our Portfolio
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4  mx-3 lg:mx-0 pt-7">
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="fade-up"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://combo-immigration.web.app/">
               <img
@@ -126,7 +136,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">
               Comgo Immigration
             </h2>
@@ -144,7 +154,12 @@ const MyPortfolio = () => {
           </div>
         </div>
 
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="fade-down"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://ema-jhons-shoping.netlify.app/">
               <img
@@ -153,7 +168,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">
               Ema John Shopping
             </h2>
@@ -170,7 +185,12 @@ const MyPortfolio = () => {
             </a>
           </div>
         </div>
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="fade-up"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://asifzone.netlify.app/">
               <img
@@ -179,7 +199,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">Asif Zone</h2>
             <p>
               Full Bootstrap Website. This Website Uses HTML, CSS, Bootstrap and
@@ -194,7 +214,12 @@ const MyPortfolio = () => {
             </a>
           </div>
         </div>
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="fade-down"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://food-akib.netlify.app/">
               <img
@@ -203,7 +228,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">Healthy Food</h2>
             <p>
               Full Javascript Website. This Website Uses Javascript, Bootstrap,
@@ -218,7 +243,12 @@ const MyPortfolio = () => {
             </a>
           </div>
         </div>
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="fade-up"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://bata-shop.netlify.app/">
               <img
@@ -227,7 +257,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">Bata Shop</h2>
             <p>
               Full React Website. This Website Uses React, Javascript ,and Etc.
@@ -241,7 +271,12 @@ const MyPortfolio = () => {
             </a>
           </div>
         </div>
-        <div class="card card-compact w-full bg-base-100 shadow-xl">
+        <div
+          data-aos="flip-down"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="1000"
+          className="card card-compact w-full bg-base-100 shadow-xl"
+        >
           <figure>
             <a target="_black" href="https://simple-houses.netlify.app/">
               <img
@@ -250,7 +285,7 @@ const MyPortfolio = () => {
               />
             </a>
           </figure>
-          <div class="card-body">
+          <div className="card-body">
             <h2 className="text-xl font-bold text-primary">Simple House</h2>
             <p>
               Full Bootstrap Website. This Website uses Bootstrap,CSS,

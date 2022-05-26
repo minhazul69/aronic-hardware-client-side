@@ -24,3 +24,9 @@ Live Link [Aronic Hardware](https://aronic-hardware.web.app/);
 - This Website Has Been Used For Payment Gateways React Stripe.
 - This Website Has Been Used For Server Site NOde js and Express js
 - This Website Has Been Used For Animation On AOS.
+
+## `ADMIN`
+
+Email: admin@gmail.com
+
+Password: admin00

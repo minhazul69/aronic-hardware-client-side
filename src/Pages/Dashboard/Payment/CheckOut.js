@@ -13,7 +13,7 @@ const CheckoutFrom = ({ order }) => {
 
   const { price, name, email, _id } = order;
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://polar-journey-11488.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -71,7 +71,7 @@ const CheckoutFrom = ({ order }) => {
         transactionId: paymentIntent.id,
       };
       console.log(payment);
-      fetch(`http://localhost:5000/order/${_id}`, {
+      fetch(`https://polar-journey-11488.herokuapp.com/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

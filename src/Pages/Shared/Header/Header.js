@@ -38,11 +38,14 @@ const Header = () => {
   const noImg =
     "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
   const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;
@@ -59,14 +62,14 @@ const Header = () => {
             <>
               <button
                 onClick={() => signOut(auth)}
-                className="btn btn-active btn-ghost mr-3"
+                className="btn btn-active btn-ghost btn-sm mr-3"
               >
                 <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>{" "}
                 Sign Out
               </button>
               <div className="dropdown dropdown-end">
-                <div class="avatar hover:cursor-pointer" tabIndex="5">
-                  <div class="w-10 rounded-full mr-2">
+                <div className="avatar hover:cursor-pointer" tabIndex="5">
+                  <div className="w-10 rounded-full mr-2">
                     <img
                       className="object-top"
                       src={profile[0] ? profile[0].image : noImg}
@@ -76,10 +79,10 @@ const Header = () => {
                 </div>
                 <div
                   tabIndex="5"
-                  class="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-60 mt-3 pb-2"
+                  className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-60 mt-3 pb-2"
                 >
-                  <div class="avatar mx-auto my-3">
-                    <div class="w-24 rounded-full">
+                  <div className="avatar mx-auto my-3">
+                    <div className="w-24 rounded-full">
                       <img
                         className="object-top"
                         src={profile[0] ? profile[0].image : noImg}

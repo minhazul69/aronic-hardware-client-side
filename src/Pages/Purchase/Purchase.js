@@ -24,7 +24,7 @@ const Purchase = () => {
     isLoading,
     refetch,
   } = useQuery("productId", () =>
-    fetch(`http://localhost:5000/product/${productId}`, {
+    fetch(`https://polar-journey-11488.herokuapp.com/product/${productId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -77,7 +77,7 @@ const Purchase = () => {
       address,
     };
     console.log(order);
-    fetch("http://localhost:5000/order", {
+    fetch("https://polar-journey-11488.herokuapp.com/order", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -89,7 +89,7 @@ const Purchase = () => {
         console.log(data);
         if (data) {
           const updateUser = { quantity: newQuantity };
-          const url = `http://localhost:5000/product/${productId}`;
+          const url = `https://polar-journey-11488.herokuapp.com/product/${productId}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -121,7 +121,7 @@ const Purchase = () => {
     }
     const newQuantity = parseInt(quantity) + parseInt(updateQuantity);
     const updateUser = { quantity: newQuantity };
-    const url = `http://localhost:5000/product/${productId}`;
+    const url = `https://polar-journey-11488.herokuapp.com/product/${productId}`;
     fetch(url, {
       method: "PUT",
       headers: {
