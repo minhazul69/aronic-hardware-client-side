@@ -1,5 +1,6 @@
 import React from "react";
 import ClientTrust from "./ClientTrustSection/ClientTrust";
+import Contact from "./Contact/Contact";
 import HomeBanner from "./HomeBanner/HomeBanner";
 import Offer from "./OfferSection/Offer";
 import Products from "./Products/Products";
@@ -15,6 +16,7 @@ const Home = () => {
       <Products />
       <Subscribe />
       <ReviewSection />
+      <Contact />
     </div>
   );
 };

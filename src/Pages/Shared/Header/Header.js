@@ -29,10 +29,6 @@ const Header = () => {
         {" "}
         <NavLink to="/myPortfolio">My Portfolio</NavLink>
       </li>
-      <li>
-        {" "}
-        <NavLink to="/contact">Contact</NavLink>
-      </li>
     </>
   );
   const noImg =
