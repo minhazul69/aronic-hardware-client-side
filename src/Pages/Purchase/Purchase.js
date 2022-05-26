@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -23,13 +23,14 @@ const Purchase = () => {
     data: productDetails,
     isLoading,
     refetch,
-  } = useQuery("productId", () =>
-    fetch(`http://localhost:5000/product/${productId}`, {
+  } = useQuery(["productDetails", "productId"], () =>
+    fetch(`https://polar-journey-11488.herokuapp.com/product/${productId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => {
+      console.log(res);
       if (res.status === 403 || res.status === 401) {
         signOut(auth);
         navigate("/");
@@ -42,7 +43,8 @@ const Purchase = () => {
   if (isLoading || process) {
     return <Spinner />;
   }
-  const { name, image, description, price, quantity } = productDetails;
+  console.log(productDetails);
+
   const handleOrderQuantity = (e) => {
     e.preventDefault();
     const orderProduct = quantityRef.current.value;
@@ -57,20 +59,20 @@ const Purchase = () => {
     if (orderProduct < 100) {
       return toast.error("Please Order Over 100");
     }
-    if (orderProduct > quantity) {
+    if (orderProduct > productDetails?.quantity) {
       return toast.error(
         "Your Order Quantity Must Be Less Then Available Quantity"
       );
     }
     setProcess(true);
-    const totalPrice = parseInt(price) * parseInt(orderProduct);
-    const newQuantity = quantity - orderProduct;
+    const totalPrice = parseInt(productDetails?.price) * parseInt(orderProduct);
+    const newQuantity = productDetails?.quantity - orderProduct;
     const email = user?.email;
     const order = {
       email,
-      name,
-      image,
-      description,
+      name: productDetails?.name,
+      image: productDetails?.email,
+      description: productDetails.description,
       price: totalPrice,
       orderProduct,
       phone,
@@ -94,6 +96,7 @@ const Purchase = () => {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(updateUser),
           })
@@ -119,7 +122,8 @@ const Purchase = () => {
     if (isNaN(updateQuantity)) {
       return toast.error("Quantity Is Not A Number Please Type Number");
     }
-    const newQuantity = parseInt(quantity) + parseInt(updateQuantity);
+    const newQuantity =
+      parseInt(productDetails?.quantity) + parseInt(updateQuantity);
     const updateUser = { quantity: newQuantity };
     const url = `http://localhost:5000/product/${productId}`;
     fetch(url, {
@@ -146,26 +150,28 @@ const Purchase = () => {
     <div className="lg:px-12">
       <div className="card lg:card-side bg-base-100 my-16 shadow-2xl">
         <figure className="lg:w-2/4">
-          <img src={image} alt={name} />
+          <img src={productDetails?.image} alt={productDetails?.name} />
         </figure>
         <div className="card-body  lg:w-2/4 bg-base-200 justify-center">
           <h2 className="text-center text-2xl lg:text-5xl font-bold mb-4">
-            {name}
+            {productDetails?.name}
           </h2>
-          <h3 className="font-bold text-xl text-red-500">Price: ${price}</h3>
-          <h3>{description}</h3>
-          {quantity === 0 ? (
+          <h3 className="font-bold text-xl text-red-500">
+            Price: ${productDetails?.price}
+          </h3>
+          <h3>{productDetails?.description}</h3>
+          {productDetails?.quantity === 0 ? (
             <h2 className="font-bold text-xl text-red-600">Product Sold</h2>
           ) : (
             <>
               <h3 className="text-1xl text-yellow-400 font-bold mt-3">
                 {" "}
-                Available Quantity: {quantity}
+                Available Quantity: {productDetails?.quantity}
               </h3>
             </>
           )}
           <form onSubmit={handleOrderQuantity}>
-            {quantity === 0 ? (
+            {productDetails?.quantity === 0 ? (
               ""
             ) : (
               <>
@@ -211,7 +217,7 @@ const Purchase = () => {
               </>
             )}
             <div className="card-actions justify-center mt-10">
-              {quantity === 0 ? (
+              {productDetails?.quantity === 0 ? (
                 <button className="btn bg-red-400 btn-wide" disabled>
                   Sold
                 </button>
@@ -230,7 +236,9 @@ const Purchase = () => {
             <h2 className="text-center text-yellow-400 text-3xl font-bold">
               Add Product Quantity
             </h2>
-            <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
+            <h2 className="text-red-400 font-bold">
+              Quantity: {productDetails?.quantity}
+            </h2>
             <form onSubmit={handleQuantityAdd}>
               <input
                 ref={addQuantityRef}
