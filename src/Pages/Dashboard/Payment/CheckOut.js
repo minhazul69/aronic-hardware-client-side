@@ -1,6 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+// import Spinner from "../../Shared/Spinner/Spinner";
 
 const CheckoutFrom = ({ order }) => {
   const [cardError, setCardError] = useState("");
@@ -8,6 +9,8 @@ const CheckoutFrom = ({ order }) => {
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  // const [processing, setProcessing] = useState(false);
+
   const { price, name, email, _id } = order;
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -26,6 +29,7 @@ const CheckoutFrom = ({ order }) => {
         console.log(data);
       });
   }, [price]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) {
@@ -39,12 +43,12 @@ const CheckoutFrom = ({ order }) => {
       type: "card",
       card,
     });
+    // setProcessing(true);
     if (error) {
       setCardError(error?.message);
     } else {
       console.log("[PaymentMethod]", paymentMethod);
     }
-
     const { paymentIntent, error: ententError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -56,6 +60,7 @@ const CheckoutFrom = ({ order }) => {
         },
       });
     if (ententError) {
+      // setProcessing(false);
       setCardError(ententError.message);
     } else {
       setTransactionId(paymentMethod.id);
@@ -76,10 +81,14 @@ const CheckoutFrom = ({ order }) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          // setProcessing(false);
           console.log(data);
         });
     }
   };
+  // if (processing) {
+  //   return <Spinner />;
+  // }
   return (
     <form onSubmit={handleSubmit}>
       <CardElement

@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import auth from "../../firebase.init";
 import useAdmin from "../Hooks/useAdmin";
 import Spinner from "../Shared/Spinner/Spinner";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 const Purchase = () => {
   const quantityRef = useRef("");
@@ -15,6 +17,8 @@ const Purchase = () => {
   const { productId } = useParams();
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
+  const navigate = useNavigate();
+  const [process, setProcess] = useState(false);
   const {
     data: productDetails,
     isLoading,
@@ -25,9 +29,17 @@ const Purchase = () => {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-    }).then((res) => res.json())
+    }).then((res) => {
+      if (res.status === 403 || res.status === 401) {
+        signOut(auth);
+        navigate("/");
+        toast.error("Your Status Is Forbidden Please Login Again");
+        return;
+      }
+      return res.json();
+    })
   );
-  if (isLoading) {
+  if (isLoading || process) {
     return <Spinner />;
   }
   const { name, image, description, price, quantity } = productDetails;
@@ -50,8 +62,8 @@ const Purchase = () => {
         "Your Order Quantity Must Be Less Then Available Quantity"
       );
     }
+    setProcess(true);
     const totalPrice = parseInt(price) * parseInt(orderProduct);
-
     const newQuantity = quantity - orderProduct;
     const email = user?.email;
     const order = {
@@ -92,6 +104,7 @@ const Purchase = () => {
                 e.target.reset();
                 refetch();
                 console.log(data);
+                setProcess(false);
               }
             });
         }
@@ -128,6 +141,7 @@ const Purchase = () => {
       });
     console.log(newQuantity);
   };
+
   return (
     <div className="lg:px-12">
       <div className="card lg:card-side bg-base-100 my-16 shadow-2xl">
@@ -147,9 +161,6 @@ const Purchase = () => {
               <h3 className="text-1xl text-yellow-400 font-bold mt-3">
                 {" "}
                 Available Quantity: {quantity}
-              </h3>
-              <h3 className="text-1xl text-red-400 mb-8">
-                Minimum Order Quantity: 100
               </h3>
             </>
           )}
@@ -193,6 +204,9 @@ const Purchase = () => {
                     placeholder="Type Quantity"
                     className="input input-bordered w-full max-w-xs border-0"
                   />
+                  <p className="text-red-500 font-bold mt-1">
+                    Minimum Order Quantity: 100
+                  </p>
                 </div>
               </>
             )}
@@ -224,6 +238,7 @@ const Purchase = () => {
                 placeholder="Add Product Quantity"
                 className="input input-bordered w-full max-w-xs"
               />
+
               <div className="card-actions justify-center">
                 <button className="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
                   Add Quantity
