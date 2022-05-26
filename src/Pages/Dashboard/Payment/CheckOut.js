@@ -9,7 +9,7 @@ const CheckoutFrom = ({ order }) => {
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
-  const [processing, setProcessing] = useState(false);
+  // const [processing, setProcessing] = useState(false);
 
   const { price, name, email, _id } = order;
   useEffect(() => {
@@ -43,7 +43,7 @@ const CheckoutFrom = ({ order }) => {
       type: "card",
       card,
     });
-    setProcessing(true);
+    // setProcessing(true);
     if (error) {
       setCardError(error?.message);
     } else {
@@ -60,7 +60,7 @@ const CheckoutFrom = ({ order }) => {
         },
       });
     if (ententError) {
-      setProcessing(false);
+      // setProcessing(false);
       setCardError(ententError.message);
     } else {
       setTransactionId(paymentMethod.id);
@@ -81,14 +81,15 @@ const CheckoutFrom = ({ order }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setProcessing(false);
+          // setProcessing(false);
           console.log(data);
         });
     }
   };
-  if (processing) {
-    return <Spinner />;
-  }
+  // Dear Sir Some How Spinner Not Working This Is Very Sed. THis Spinner Only Working on oncognero Mode
+  // if (processing) {
+  //   return <Spinner />;
+  // }
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
