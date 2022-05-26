@@ -7,7 +7,12 @@ const Product = ({ product }) => {
     navigate(`/product/${id}`);
   };
   return (
-    <div className="card w-full bg-base-100 shadow-xl mb-10 hover:shadow-2xl">
+    <div
+      className="card w-full bg-base-100 shadow-xl mb-10 hover:shadow-2xl"
+      data-aos="flip-right"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="1000"
+    >
       <figure>
         <img src={image} alt={name} />
       </figure>

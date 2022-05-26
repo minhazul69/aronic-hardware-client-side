@@ -24,8 +24,14 @@ import NotFound from "./Pages/NotFound/NotFound";
 import Payment from "./Pages/Dashboard/Payment/Payment";
 import RequireAdmin from "./Pages/RequireAdmin/RequireAdmin";
 import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div className="App">
       <Header />

@@ -5,7 +5,12 @@ import offerImg2 from "../../../img/img6_770x.webp";
 const Offer = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-12 gap-4 mt-10 mx-3 lg:mx-0">
-      <div className="card  bg-base-100 shadow-xl items-end image-full">
+      <div
+        data-aos="fade-up"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="1500"
+        className="card  bg-base-100 shadow-xl items-end image-full"
+      >
         <figure className="h-full">
           <img src={offerImg1} alt="Shoes" />
         </figure>
@@ -26,7 +31,12 @@ const Offer = () => {
           </div>
         </div>
       </div>
-      <div className="card bg-base-100 shadow-xl image-full items-end">
+      <div
+        data-aos="fade-down"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="1500"
+        className="card bg-base-100 shadow-xl image-full items-end "
+      >
         <figure className="h-full">
           <img src={offerImg2} alt="Shoes" />
         </figure>

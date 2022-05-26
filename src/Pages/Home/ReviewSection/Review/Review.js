@@ -3,7 +3,12 @@ import React from "react";
 const Review = ({ review }) => {
   const { name, image, countryName, description, myDate, rating } = review;
   return (
-    <div className="card w-full bg-base-100 shadow-xl px-6 ">
+    <div
+      className="card w-full bg-base-100 shadow-xl px-6 "
+      data-aos="zoom-in-up"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="1000"
+    >
       <div className="card-body">
         <div className="flex items-center">
           <div className="avatar mr-3">
