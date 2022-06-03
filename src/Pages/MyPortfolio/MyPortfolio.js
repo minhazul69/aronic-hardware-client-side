@@ -17,14 +17,14 @@ const MyPortfolio = () => {
             Hi There !
           </h1>
           <p className="text-justify grow-0">
-            Hi! I am Minhajul Alam.I'm learning web development. I have
-            professional experience with programming languages and tools such as
-            HTML, CSS, Bootstrap, ect. contribute features by writing and
-            maintaining code. I am highly motivated and enthusiastic, always
-            with excellent attention to detail. I will give my best effort to
-            achieve the best result. All tasks I try to carry out on time and in
-            full. So if you have any questions or inputs, please don't hesitate
-            to contact me.
+            Hi! I am <span className="font-bold">Minhajul Alam</span>.I'm
+            learning web development. I have professional experience with
+            programming languages and tools such as HTML, CSS, Bootstrap, ect.
+            contribute features by writing and maintaining code. I am highly
+            motivated and enthusiastic, always with excellent attention to
+            detail. I will give my best effort to achieve the best result. All
+            tasks I try to carry out on time and in full. So if you have any
+            questions or inputs, please don't hesitate to contact me.
           </p>
         </div>
       </div>
@@ -54,7 +54,9 @@ const MyPortfolio = () => {
             </div>
             <div className="mt-6">
               <p className="text-1xl font-bold text-yellow-400">Education:</p>
-              <h2 className="text-xl lg:text-2xl font-bold">HSC DONE</h2>
+              <h2 className="text-xl lg:text-2xl font-bold">
+                Nazirhat University College
+              </h2>
             </div>
             <div className="mt-6">
               <p className="text-1xl font-bold text-yellow-400">Location:</p>
@@ -65,7 +67,11 @@ const MyPortfolio = () => {
             <div className="mt-6">
               <p className="text-1xl font-bold text-yellow-400">Linkedin:</p>
               <h2 className="text-xl lg:text-2xl font-bold">
-                <a href="https://www.linkedin.com/in/akib-chy/" target="_blank">
+                <a
+                  rel="noreferrer"
+                  href="https://www.linkedin.com/in/akib-chy/"
+                  target="_blank"
+                >
                   Akib Chowdhury
                 </a>
               </h2>
@@ -110,6 +116,9 @@ const MyPortfolio = () => {
             <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
               MATERIAL UI
             </button>
+            <button className="btn btn-outline btn-sm mr-2 mb-2 font-bold">
+              MONGO DB
+            </button>
           </div>
         </div>
       </div>
@@ -131,6 +140,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://combo-immigration.web.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/626623293dfcf03850b51835/screenshot_2022-04-25-04-27-52-0000.png"
                 alt="Shoes"
               />
@@ -144,13 +154,24 @@ const MyPortfolio = () => {
               Full React Website. This Website Uses React, MongoDB, Firebase ,
               Express js, Animation AOS and Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://combo-immigration.web.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://combo-immigration.web.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/comgo-immigration-with-react"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
 
@@ -163,6 +184,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://ema-jhons-shoping.netlify.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/6279454bcc596100bc5140c1/screenshot_2022-05-09-16-46-13-0000.png"
                 alt="Shoes"
               />
@@ -176,13 +198,24 @@ const MyPortfolio = () => {
               Full React Website. This Website Uses React, MongoDB, Firebase ,
               Express js and Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://ema-jhons-shoping.netlify.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://ema-jhons-shoping.netlify.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/ema-john-shoping"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
         <div
@@ -194,6 +227,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://asifzone.netlify.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/614b07fa12f1159ff3d75248/screenshot_2021-09-22-10-39-57-0000.png"
                 alt="Shoes"
               />
@@ -205,13 +239,24 @@ const MyPortfolio = () => {
               Full Bootstrap Website. This Website Uses HTML, CSS, Bootstrap and
               Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://asifzone.netlify.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://asifzone.netlify.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/asifzone"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
         <div
@@ -223,6 +268,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://food-akib.netlify.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/61482574d1832a471b13e782/screenshot_2021-09-20-06-08-58-0000.png"
                 alt="Shoes"
               />
@@ -234,13 +280,24 @@ const MyPortfolio = () => {
               Full Javascript Website. This Website Uses Javascript, Bootstrap,
               HTML, CSS and Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://food-akib.netlify.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://food-akib.netlify.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/My-Awesome-Food-Store-Project"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
         <div
@@ -252,6 +309,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://bata-shop.netlify.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/624e6e0979576d1d2b3f1190/screenshot_2022-04-07-04-52-33-0000.png"
                 alt="Shoes"
               />
@@ -262,13 +320,24 @@ const MyPortfolio = () => {
             <p>
               Full React Website. This Website Uses React, Javascript ,and Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://bata-shop.netlify.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://bata-shop.netlify.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/bata-shop-with-react"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
         <div
@@ -280,6 +349,7 @@ const MyPortfolio = () => {
           <figure>
             <a target="_black" href="https://simple-houses.netlify.app/">
               <img
+                className="w-full"
                 src="https://screenshot-proxy.netlify.app/f_avif,w_336/https://d33wubrfki0l68.cloudfront.net/622f545f62f15b2461c4f952/screenshot_2022-03-14-14-42-48-0000.png"
                 alt="Shoes"
               />
@@ -291,13 +361,24 @@ const MyPortfolio = () => {
               Full Bootstrap Website. This Website uses Bootstrap,CSS,
               Javascript and Etc.
             </p>
-            <a
-              className="btn btn-outline btn-primary font-bold text-white mt-2"
-              target="_blank"
-              href="https://simple-houses.netlify.app/"
-            >
-              Live Preview
-            </a>
+            <div className="flex justify-between mt-3">
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-primary font-bold text-white mt-2"
+                target="_blank"
+                href="https://simple-houses.netlify.app/"
+              >
+                Live Preview
+              </a>
+              <a
+                rel="noreferrer"
+                className="btn btn-outline btn-secondary font-bold text-white mt-2"
+                target="_blank"
+                href="https://github.com/akib-chy/simple-house-templet"
+              >
+                GITHUB CODE
+              </a>
+            </div>
           </div>
         </div>
       </div>

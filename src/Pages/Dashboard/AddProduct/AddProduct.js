@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Spinner from "../../Shared/Spinner/Spinner";
 
 const AddProduct = () => {
   const [file, setFile] = useState();
+  const [loading, setLoading] = useState(false);
   const nameRef = useRef("");
   const priceRef = useRef("");
   const quantityRef = useRef("");
@@ -33,6 +35,7 @@ const AddProduct = () => {
     }
     const image = file;
     console.log("image", image);
+    setLoading(true);
     const formData = new FormData();
     formData.append("image", image);
     const imageStorageKey = "fda6ab6214274b735172bdbc386ccc58";
@@ -54,7 +57,7 @@ const AddProduct = () => {
             description,
             quantity,
           };
-          fetch("https://polar-journey-11488.herokuapp.com/product", {
+          fetch("http://localhost:5000/product", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -66,9 +69,11 @@ const AddProduct = () => {
             .then((inserted) => {
               console.log(inserted);
               if (inserted.insertedId) {
+                setLoading(false);
                 toast.success("Product Added SuccessFull");
                 e.target.reset();
               } else {
+                setLoading(false);
                 toast.error("Product Add Fail Please Try Again");
               }
               console.log(inserted);
@@ -82,6 +87,10 @@ const AddProduct = () => {
     const [f] = e.target.files;
     setFile(f);
   };
+  // SPINNER USES
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <div className="card w-full lg:w-96 bg-base-100 shadow-xl mx-auto my-10">
@@ -108,7 +117,7 @@ const AddProduct = () => {
                 <span className="label-text">Price</span>
               </label>
               <input
-                requuired
+                required
                 placeholder="Enter Product Price"
                 id="price"
                 ref={priceRef}
@@ -183,7 +192,7 @@ const AddProduct = () => {
             </small>
             <div className="divider">OR</div>
             <button type="submit" className="btn btn-warning ">
-              Add Review
+              Add Product
             </button>
           </form>
         </div>

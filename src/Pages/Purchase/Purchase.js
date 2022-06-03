@@ -10,10 +10,17 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 
 const Purchase = () => {
+  // PRODUCT PURCHASE VALUE
   const quantityRef = useRef("");
   const phoneRef = useRef("");
   const addressRef = useRef("");
-  const addQuantityRef = useRef("");
+  // PRODUCT EDIT VALUE
+  const editNameRef = useRef("");
+  const editQuantityRef = useRef("");
+  const editPriceRef = useRef("");
+  const editDescriptionRef = useRef("");
+  const [fileImage, setFileImage] = useState();
+  const [imageUrl, setImageUrl] = useState();
   const { productId } = useParams();
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
@@ -24,7 +31,7 @@ const Purchase = () => {
     isLoading,
     refetch,
   } = useQuery("productId", () =>
-    fetch(`https://polar-journey-11488.herokuapp.com/product/${productId}`, {
+    fetch(`http://localhost:5000/product/${productId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -46,6 +53,7 @@ const Purchase = () => {
   const handleOrderQuantity = (e) => {
     e.preventDefault();
     const orderProduct = quantityRef.current.value;
+    console.log(orderProduct);
     const phone = quantityRef.current.value;
     const address = quantityRef.current.value;
     if (!phone || !address || !orderProduct) {
@@ -57,7 +65,9 @@ const Purchase = () => {
     if (orderProduct < 100) {
       return toast.error("Please Order Over 100");
     }
+    console.log(orderProduct, quantity);
     if (orderProduct > quantity) {
+      console.log(orderProduct, quantity);
       return toast.error(
         "Your Order Quantity Must Be Less Then Available Quantity"
       );
@@ -77,7 +87,7 @@ const Purchase = () => {
       address,
     };
     console.log(order);
-    fetch("https://polar-journey-11488.herokuapp.com/order", {
+    fetch("http://localhost:5000/order", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -89,7 +99,7 @@ const Purchase = () => {
         console.log(data);
         if (data) {
           const updateUser = { quantity: newQuantity };
-          const url = `https://polar-journey-11488.herokuapp.com/product/${productId}`;
+          const url = `http://localhost:5000/product/${productId}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -110,38 +120,111 @@ const Purchase = () => {
         }
       });
   };
-  const handleQuantityAdd = (e) => {
+
+  let updateImage = "";
+  const handleQuantityAdd = async (e) => {
     e.preventDefault();
-    const updateQuantity = addQuantityRef.current.value;
-    if (!updateQuantity) {
-      return toast.error("Please Type A Quantity");
+    const updatedName = editNameRef.current.value;
+    const updatedPrice = editPriceRef.current.value;
+    const updatedQuantity = editQuantityRef.current.value;
+    const updatedDescription = editDescriptionRef.current.value;
+    let updateName;
+    let updatePrice;
+    let updateQuantity;
+    let updateDescription;
+    if (fileImage?.size > 1000000) {
+      console.log(fileImage.size);
+      return toast.error("Image Must Be less Then 1000kb");
     }
+    // CHECK UPDATE NAME
+    if (updatedName.length === 0) {
+      updateName = name;
+    } else {
+      updateName = updatedName;
+    }
+    // CHECK UPDATE PRICE
+    if (updatedPrice.length === 0) {
+      updatePrice = price;
+    } else {
+      updatePrice = updatedPrice;
+    }
+    // CHECK UPDATE QUANTITY
+    if (updatedQuantity.length === 0) {
+      updateQuantity = quantity;
+    } else {
+      updateQuantity = updatedQuantity;
+    }
+    // CHECK UPDATE DESCRIPTION
+    if (updatedDescription.length === 0) {
+      updateDescription = description;
+    } else {
+      updateDescription = updatedDescription;
+    }
+    // CHECK UPDATE IMAGE
+    if (fileImage === undefined) {
+      // updateImage = image;
+      setImageUrl(image);
+    } else {
+      setProcess(true);
+      const formData = new FormData();
+      formData.append("image", fileImage);
+      const imageStorageKey = "fda6ab6214274b735172bdbc386ccc58";
+      const imgbbURL = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+      fetch(imgbbURL, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.success) {
+            setImageUrl(result.data.url);
+          }
+          console.log(result);
+        });
+    }
+
     if (isNaN(updateQuantity)) {
+      setProcess(false);
       return toast.error("Quantity Is Not A Number Please Type Number");
     }
-    const newQuantity = parseInt(quantity) + parseInt(updateQuantity);
-    const updateUser = { quantity: newQuantity };
-    const url = `https://polar-journey-11488.herokuapp.com/product/${productId}`;
+    if (isNaN(updatePrice)) {
+      setProcess(false);
+      return toast.error("Price Is Not A Number Please Type Number");
+    }
+
+    const updateProduct = {
+      name: updateName,
+      price: updatePrice,
+      quantity: updateQuantity,
+      description: updateDescription,
+      image: imageUrl || image,
+    };
+    const url = `http://localhost:5000/updateProduct/${productId}`;
     fetch(url, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updateUser),
+      body: JSON.stringify(updateProduct),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data) {
+          setProcess(false);
           refetch();
-          toast.success("Your Order Added SuccessFull");
+          toast.success("Product Update SuccessFully");
           e.target.reset();
           console.log(data);
         }
       });
-    console.log(newQuantity);
+    console.log(updateProduct);
   };
-
+  // GET IMAGE FILE VALUE
+  const handleUrlChange = (e) => {
+    const [f] = e.target.files;
+    setFileImage(f);
+  };
   return (
     <div className="lg:px-12">
       <div className="card lg:card-side bg-base-100 my-16 shadow-2xl">
@@ -200,7 +283,7 @@ const Purchase = () => {
                   <input
                     id="quantity"
                     ref={quantityRef}
-                    type="text"
+                    type="number"
                     placeholder="Type Quantity"
                     className="input input-bordered w-full max-w-xs border-0"
                   />
@@ -216,7 +299,11 @@ const Purchase = () => {
                   Sold
                 </button>
               ) : (
-                <button type="submit" className="btn btn-primary">
+                <button
+                  disabled={admin}
+                  type="submit"
+                  className="btn btn-primary"
+                >
                   Purchase Now
                 </button>
               )}
@@ -228,20 +315,107 @@ const Purchase = () => {
         <div className="card w-96 bg-base-100 shadow-2xl mx-auto">
           <div className="card-body">
             <h2 className="text-center text-yellow-400 text-3xl font-bold">
-              Add Product Quantity
+              Edit Product
             </h2>
-            <h2 className="text-red-400 font-bold">Quantity: {quantity}</h2>
             <form onSubmit={handleQuantityAdd}>
-              <input
-                ref={addQuantityRef}
-                type="text"
-                placeholder="Add Product Quantity"
-                className="input input-bordered w-full max-w-xs"
-              />
-
+              {/* EDIT NAME */}
+              <div className="mb-4">
+                <label htmlFor="name" className="label">
+                  <span className="label-text">Edit Product Name</span>
+                </label>
+                <input
+                  id="name"
+                  ref={editNameRef}
+                  type="text"
+                  placeholder={name}
+                  className="input input-bordered w-full max-w-xs border-primary"
+                />
+              </div>
+              {/* EDIT PRICE */}
+              <div className="mb-4">
+                <label htmlFor="price" className="label">
+                  <span className="label-text">Edit Product Price</span>
+                </label>
+                <input
+                  id="price"
+                  ref={editPriceRef}
+                  type="number"
+                  placeholder={price}
+                  className="input input-bordered w-full max-w-xs border-primary"
+                />
+              </div>
+              {/* EDIT QUANTITY */}
+              <div className="mb-4">
+                <label htmlFor="editQuantity" className="label">
+                  <span className="label-text">Edit Product Quantity</span>
+                </label>
+                <input
+                  id="editQuantity"
+                  ref={editQuantityRef}
+                  type="number"
+                  placeholder={quantity}
+                  className="input input-bordered w-full max-w-xs border-primary"
+                />
+              </div>
+              {/* EDIT DESCRIPTION */}
+              <div className="mb-4">
+                <label htmlFor="description" className="label">
+                  <span className="label-text">Edit Product Description</span>
+                </label>
+                <textarea
+                  ref={editDescriptionRef}
+                  id="description"
+                  className="textarea textarea-primary h-40 w-full"
+                  placeholder={description}
+                ></textarea>
+              </div>
+              {/* EDIT IMAGE */}
+              <label htmlFor="image" className="label">
+                <span className="label-text">Edit Product Image</span>
+              </label>
+              <div className="flex justify-center items-center w-full">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col justify-center items-center w-full h-28 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <div className="flex flex-col justify-center items-center pt-5 pb-6 ">
+                    <svg
+                      className="mb-3 w-10 h-10 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                  </div>
+                  <input
+                    onChange={handleUrlChange}
+                    multiple={false}
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                  />
+                </label>
+              </div>
+              <p className="text-left text-red-500 font-bold mt-1 ml-2">
+                <small>Image must me less then 1000kb</small>
+              </p>
               <div className="card-actions justify-center">
                 <button className="btn bg-yellow-400 mt-8 border-0 hover:bg-yellow-400">
-                  Add Quantity
+                  Save Edit
                 </button>
               </div>
             </form>

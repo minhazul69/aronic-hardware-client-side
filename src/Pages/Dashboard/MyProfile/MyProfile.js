@@ -8,14 +8,11 @@ import { useQuery } from "react-query";
 const MyProfile = () => {
   const [user] = useAuthState(auth);
   const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(
-      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;

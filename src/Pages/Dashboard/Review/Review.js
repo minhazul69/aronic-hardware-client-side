@@ -53,7 +53,7 @@ const Review = () => {
             rating,
             description,
           };
-          fetch("https://polar-journey-11488.herokuapp.com/review", {
+          fetch("http://localhost:5000/review", {
             method: "POST",
             headers: {
               "content-type": "application/json",

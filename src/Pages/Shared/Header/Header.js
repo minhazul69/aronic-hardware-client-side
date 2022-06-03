@@ -34,18 +34,19 @@ const Header = () => {
   const noImg =
     "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
   const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(
-      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;
   }
+  const handleSignOut = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
   return (
     <div className="lg:px-36 mt-5">
       <div className="flex items-center justify-between">
@@ -56,18 +57,11 @@ const Header = () => {
         <div className="flex items-center">
           {user ? (
             <>
-              <button
-                onClick={() => signOut(auth)}
-                className="btn btn-active btn-ghost btn-sm mr-3"
-              >
-                <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>{" "}
-                Sign Out
-              </button>
               <div className="dropdown dropdown-end">
                 <div className="avatar hover:cursor-pointer" tabIndex="5">
-                  <div className="w-10 rounded-full mr-2">
+                  <div className="w-12 rounded-full mr-2 border-2 border-yellow-400">
                     <img
-                      className="object-top"
+                      className="object-top "
                       src={profile[0] ? profile[0].image : noImg}
                       alt={user?.displayName}
                     />
@@ -110,6 +104,13 @@ const Header = () => {
                       >
                         My Profile
                       </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="btn w-full btn-link text-left mt-2 hover:no-underline btn-sm mr-3"
+                      >
+                        <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>{" "}
+                        Sign Out
+                      </button>
                     </div>
                   ) : (
                     <>
@@ -125,6 +126,13 @@ const Header = () => {
                       >
                         Edit Profile
                       </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="btn w-full btn-sm mr-3 btn-link text-left mt-2 hover:no-underline"
+                      >
+                        <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i>{" "}
+                        Sign Out
+                      </button>
                     </>
                   )}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -11,6 +11,8 @@ import useToken from "../../Hooks/useToken";
 const Login = () => {
   const [signInWithEmailAndPassword, user, signinLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
+  const [show, setShow] = useState(false);
+  const passwordShowRef = useRef("");
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -21,6 +23,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const [token] = useToken(user);
+  const handleShow = () => {
+    const passShow = passwordShowRef.current.checked;
+    setShow(passShow);
+  };
   useEffect(() => {
     if (token) {
       navigate(from, { replace: true });
@@ -84,12 +90,23 @@ const Login = () => {
                 )}
               </label>
             </div>
-            <div className="form-control w-full max-w-xs ">
+            <div className="relative form-control w-full max-w-xs ">
               <label className="label">
                 <span className="label-password">Password</span>
               </label>
+              {/* PASSWORD SHOW HIDE */}
+              <div
+                onClick={handleShow}
+                className="absolute inset-y-0 right-3 flex items-center px-2 top-6"
+              >
+                <label className="swap swap-rotate">
+                  <input ref={passwordShowRef} type="checkbox" />
+                  <i className="fa-solid fa-eye-low-vision swap-on fill-current"></i>
+                  <i className="fa-solid fa-eye swap-off fill-current"></i>
+                </label>
+              </div>
               <input
-                type="password"
+                type={show ? "text" : "password"}
                 placeholder="Password"
                 className="input input-bordered w-full max-w-xs"
                 {...register("password", {
@@ -116,12 +133,11 @@ const Login = () => {
                 )}
               </label>
             </div>
-            <Link
-              to="/resetPassword"
-              className="btn btn-active btn-link btn-sm"
-            >
-              Forgot Password ?
-            </Link>
+            <div className="text-left mb-3">
+              <Link to="/resetPassword" className="font-bold text-yellow-400">
+                Forgot Password ?
+              </Link>
+            </div>
             <input className="btn w-full" type="submit" value="Login" />
           </form>
           <p className="text-center my-2">

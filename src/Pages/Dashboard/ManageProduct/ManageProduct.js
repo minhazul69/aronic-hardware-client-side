@@ -9,9 +9,7 @@ const ManageProduct = () => {
     isLoading,
     refetch,
   } = useQuery("products", () =>
-    fetch("https://polar-journey-11488.herokuapp.com/products").then((res) =>
-      res.json()
-    )
+    fetch("http://localhost:5000/products").then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;
@@ -26,9 +24,11 @@ const ManageProduct = () => {
           <thead>
             <tr>
               <th></th>
+              <th>Image</th>
               <th>Name</th>
               <th>Price</th>
               <th>Quantity</th>
+              <th>Edit Product</th>
               <th>Delete</th>
             </tr>
           </thead>

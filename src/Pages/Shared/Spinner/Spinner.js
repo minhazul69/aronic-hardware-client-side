@@ -2,7 +2,10 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div className="flex items-center justify-center ">
+    <div
+      style={{ height: "100vh" }}
+      className="flex items-center justify-center my-16"
+    >
       <button
         disabled
         type="button"

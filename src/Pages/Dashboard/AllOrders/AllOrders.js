@@ -9,7 +9,7 @@ const AllOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch("https://polar-journey-11488.herokuapp.com/orders", {
+    fetch("http://localhost:5000/orders", {
       headers: {
         authorization: ` Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -23,6 +23,9 @@ const AllOrders = () => {
       <h1 className="text-center lg:text-left font-bold text-3xl mb-3">
         Manage All Orders
       </h1>
+      <h2 className="font-bold text-3xl text-yellow-400 mb-2">
+        Total Order {orders.length}{" "}
+      </h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>

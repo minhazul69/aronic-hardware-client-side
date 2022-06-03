@@ -15,7 +15,7 @@ const User = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://polar-journey-11488.herokuapp.com/user/${id}`, {
+        fetch(`http://localhost:5000/user/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -53,15 +53,12 @@ const User = ({ user, index, refetch }) => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(
-            `https://polar-journey-11488.herokuapp.com/user/admin/${email}`,
-            {
-              method: "PUT",
-              headers: {
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-            }
-          )
+          fetch(`http://localhost:5000/user/admin/${email}`, {
+            method: "PUT",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          })
             .then((res) => {
               console.log(res);
               if (res.status === 403) {

@@ -5,9 +5,7 @@ import Product from "./Product/Product";
 
 const Products = () => {
   const { data: products, isLoading } = useQuery("products", () =>
-    fetch("https://polar-journey-11488.herokuapp.com/products").then((res) =>
-      res.json()
-    )
+    fetch("http://localhost:5000/products").then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;

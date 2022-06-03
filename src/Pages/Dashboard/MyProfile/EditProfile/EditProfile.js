@@ -18,6 +18,13 @@ const EditProfile = () => {
   const addressRef = useRef("");
 
   const [user] = useAuthState(auth);
+  const { data: profile, isLoading } = useQuery("profile", () =>
+    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
+  );
   // ADD PRODUCT
   const handleEditProfile = (e) => {
     e.preventDefault();
@@ -40,6 +47,39 @@ const EditProfile = () => {
         text: "File size must not exceed 2000 KB",
       });
     }
+
+    // UPDATE ON TIME SITE
+
+    // let updateAddress;
+    // let updatePhone;
+    // let updateEducation;
+    // let updateLinkedinLink;
+    // let updateFacebookLink;
+    // // CHECK UPDATE ITEM
+    // // CHECK UPDATE ADDRESS
+    // if (address.length === 0) {
+    //   updateAddress = profile[0]?.address;
+    // } else {
+    //   updateAddress = address;
+    // }
+    // // CHECK UPDATE EDUCATION
+    // if (education.length === 0) {
+    //   updateEducation = profile[0]?.education;
+    // } else {
+    //   updateEducation = education;
+    // }
+    // // CHECK UPDATE PHONE NUMBER
+    // if (phone.length === 0) {
+    //   updatePhone = profile[0]?.phone;
+    // } else {
+    //   updatePhone = phone;
+    // }
+    // // CHECK UPDATE lINKEDIN LINK
+    // if (linkedin.length === 0) {
+    //   updateLinkedinLink = profile[0]?.linkedin;
+    // } else {
+    //   updateLinkedinLink = linkedin;
+    // }
     const image = file;
     console.log("image", image);
     setLoading(true);
@@ -67,17 +107,14 @@ const EditProfile = () => {
             facebook,
             address,
           };
-          fetch(
-            `https://polar-journey-11488.herokuapp.com/userProfile/${user.email}`,
-            {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-              body: JSON.stringify(addProduct),
-            }
-          )
+          fetch(`http://localhost:5000/userProfile/${user.email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(addProduct),
+          })
             .then((res) => res.json())
             .then((inserted) => {
               console.log(inserted);
@@ -100,16 +137,7 @@ const EditProfile = () => {
     const [f] = e.target.files;
     setFile(f);
   };
-  const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(
-      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
-  );
+
   if (isLoading || loading) {
     return <Spinner />;
   }
@@ -183,7 +211,7 @@ const EditProfile = () => {
                 }
                 id="education"
                 ref={educationRef}
-                type="tel"
+                type="text"
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
@@ -200,7 +228,7 @@ const EditProfile = () => {
                 }
                 id="linkedin"
                 ref={linkedinRef}
-                type="tel"
+                type="text"
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
@@ -217,7 +245,7 @@ const EditProfile = () => {
                 }
                 id="facebook"
                 ref={facebookRef}
-                type="tel"
+                type="text"
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
@@ -263,7 +291,7 @@ const EditProfile = () => {
             </small>
             <div className="divider">OR</div>
             <button type="submit" className="btn btn-warning ">
-              Add Review
+              Save Edit
             </button>
           </form>
         </div>

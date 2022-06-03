@@ -12,7 +12,7 @@ const Payment = () => {
   const { id } = useParams();
 
   const { data: order, isLoading } = useQuery(["Order", id], () =>
-    fetch(`https://polar-journey-11488.herokuapp.com/order/${id}`, {
+    fetch(`http://localhost:5000/order/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

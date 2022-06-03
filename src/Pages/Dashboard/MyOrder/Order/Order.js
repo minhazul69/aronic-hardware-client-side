@@ -16,7 +16,7 @@ const Order = ({ order, index }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://polar-journey-11488.herokuapp.com/order/${id}`, {
+        fetch(`http://localhost:5000/order/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -41,6 +41,26 @@ const Order = ({ order, index }) => {
       <td>{email}</td>
       <td>{orderProduct}</td>
       <td>{price}</td>
+      {status && (
+        <td>
+          {status === "shipped" ? (
+            <button className="btn btn-primary font-bold btn-sm">
+              Order Shipped
+            </button>
+          ) : (
+            <button className="btn btn-warning text-white font-bold btn-sm">
+              Order Pending
+            </button>
+          )}
+        </td>
+      )}
+      {!status && (
+        <td>
+          <button className="btn btn-error btn-sm font-bold text-white">
+            Not Paid
+          </button>
+        </td>
+      )}
 
       <td>
         {status ? (
@@ -57,7 +77,7 @@ const Order = ({ order, index }) => {
         ) : (
           <Link
             to={`/dashboard/payment/${_id}`}
-            className="btn btn-success btn-sm"
+            className="btn btn-success btn-sm font-bold"
           >
             Pay Now
           </Link>
