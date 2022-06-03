@@ -14,7 +14,7 @@ const Order = ({ order, index, refetch }) => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/updateOrder/${id}`, {
+        fetch(`https://polar-journey-11488.herokuapp.com/updateOrder/${id}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -41,7 +41,7 @@ const Order = ({ order, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://polar-journey-11488.herokuapp.com/order/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

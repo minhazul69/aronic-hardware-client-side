@@ -34,11 +34,14 @@ const Header = () => {
   const noImg =
     "https://www.ncenet.com/wp-content/uploads/2020/04/No-image-found.jpg";
   const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Spinner />;

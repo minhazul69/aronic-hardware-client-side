@@ -57,7 +57,7 @@ const AddProduct = () => {
             description,
             quantity,
           };
-          fetch("http://localhost:5000/product", {
+          fetch("https://polar-journey-11488.herokuapp.com/product", {
             method: "POST",
             headers: {
               "content-type": "application/json",

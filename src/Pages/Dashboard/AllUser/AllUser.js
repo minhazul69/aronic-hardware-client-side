@@ -9,7 +9,7 @@ const AllUser = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("http://localhost:5000/user", {
+    fetch("https://polar-journey-11488.herokuapp.com/user", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

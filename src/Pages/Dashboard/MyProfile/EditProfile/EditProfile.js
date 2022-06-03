@@ -19,11 +19,14 @@ const EditProfile = () => {
 
   const [user] = useAuthState(auth);
   const { data: profile, isLoading } = useQuery("profile", () =>
-    fetch(`http://localhost:5000/myProfile?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://polar-journey-11488.herokuapp.com/myProfile?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   // ADD PRODUCT
   const handleEditProfile = (e) => {
@@ -107,14 +110,17 @@ const EditProfile = () => {
             facebook,
             address,
           };
-          fetch(`http://localhost:5000/userProfile/${user.email}`, {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(addProduct),
-          })
+          fetch(
+            `https://polar-journey-11488.herokuapp.com/userProfile/${user.email}`,
+            {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+              body: JSON.stringify(addProduct),
+            }
+          )
             .then((res) => res.json())
             .then((inserted) => {
               console.log(inserted);
