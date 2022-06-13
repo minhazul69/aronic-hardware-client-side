@@ -189,7 +189,7 @@ const Purchase = () => {
     }
     if (isNaN(updatePrice)) {
       setProcess(false);
-      return toast.error("Price Is Not A Number Please Type Number");
+      return toast.error("This Is Not A Number Please Type Number");
     }
 
     const updateProduct = {
