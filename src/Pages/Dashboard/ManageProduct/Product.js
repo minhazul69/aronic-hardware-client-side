@@ -16,7 +16,7 @@ const Product = ({ product, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://polar-journey-11488.herokuapp.com/product/${id}`, {
+        fetch(`https://aronic-hardware.onrender.com/product/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

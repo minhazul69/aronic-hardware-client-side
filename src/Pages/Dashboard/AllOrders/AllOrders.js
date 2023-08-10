@@ -9,7 +9,7 @@ const AllOrders = () => {
     isLoading,
     refetch,
   } = useQuery("orders", () =>
-    fetch("https://polar-journey-11488.herokuapp.com/orders", {
+    fetch("https://aronic-hardware.onrender.com/orders", {
       headers: {
         authorization: ` Bearer ${localStorage.getItem("accessToken")}`,
       },

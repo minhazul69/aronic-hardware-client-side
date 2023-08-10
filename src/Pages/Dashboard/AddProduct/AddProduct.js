@@ -57,7 +57,7 @@ const AddProduct = () => {
             description,
             quantity,
           };
-          fetch("https://polar-journey-11488.herokuapp.com/product", {
+          fetch("https://aronic-hardware.onrender.com/product", {
             method: "POST",
             headers: {
               "content-type": "application/json",

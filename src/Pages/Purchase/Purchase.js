@@ -31,7 +31,7 @@ const Purchase = () => {
     isLoading,
     refetch,
   } = useQuery("productId", () =>
-    fetch(`https://polar-journey-11488.herokuapp.com/product/${productId}`, {
+    fetch(`https://aronic-hardware.onrender.com/product/${productId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -87,7 +87,7 @@ const Purchase = () => {
       address,
     };
     console.log(order);
-    fetch("https://polar-journey-11488.herokuapp.com/order", {
+    fetch("https://aronic-hardware.onrender.com/order", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -99,7 +99,7 @@ const Purchase = () => {
         console.log(data);
         if (data) {
           const updateUser = { quantity: newQuantity };
-          const url = `https://polar-journey-11488.herokuapp.com/product/${productId}`;
+          const url = `https://aronic-hardware.onrender.com/product/${productId}`;
           fetch(url, {
             method: "PUT",
             headers: {
@@ -199,7 +199,7 @@ const Purchase = () => {
       description: updateDescription,
       image: imageUrl || image,
     };
-    const url = `https://polar-journey-11488.herokuapp.com/updateProduct/${productId}`;
+    const url = `https://aronic-hardware.onrender.com/updateProduct/${productId}`;
     fetch(url, {
       method: "PATCH",
       headers: {

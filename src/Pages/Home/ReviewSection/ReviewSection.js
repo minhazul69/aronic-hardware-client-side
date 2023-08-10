@@ -4,7 +4,7 @@ import Spinner from "../../Shared/Spinner/Spinner";
 import Review from "./Review/Review";
 const ReviewSection = () => {
   const { data: allReviews, isLoading } = useQuery("allReviews", () =>
-    fetch("https://polar-journey-11488.herokuapp.com/review", {
+    fetch("https://aronic-hardware.onrender.com/review", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

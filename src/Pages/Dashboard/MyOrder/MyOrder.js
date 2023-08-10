@@ -11,15 +11,12 @@ const MyOrder = () => {
   const [user] = useAuthState(auth);
   useEffect(() => {
     if (user) {
-      fetch(
-        `https://polar-journey-11488.herokuapp.com/order?email=${user?.email}`,
-        {
-          method: "GET",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`https://aronic-hardware.onrender.com/order?email=${user?.email}`, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
             signOut(auth);

@@ -13,7 +13,7 @@ const CheckoutFrom = ({ order }) => {
 
   const { price, name, email, _id } = order;
   useEffect(() => {
-    fetch("https://polar-journey-11488.herokuapp.com/create-payment-intent", {
+    fetch("https://aronic-hardware.onrender.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -71,7 +71,7 @@ const CheckoutFrom = ({ order }) => {
         transactionId: paymentIntent.id,
       };
       console.log(payment);
-      fetch(`https://polar-journey-11488.herokuapp.com/order/${_id}`, {
+      fetch(`https://aronic-hardware.onrender.com/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
